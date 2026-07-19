@@ -124,7 +124,7 @@
         .scroll-reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
 
-        /* === 0. URGENCY BAR (MODIFICADA PARA LARANJA/PRETO) === */
+        /* === 0. URGENCY BAR === */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
             text-align: center; font-size: 16px; font-weight: 800;
@@ -227,12 +227,88 @@
             background: var(--red-main); color: #fff; font-size: 12px; font-weight: bold;
             padding: 4px 16px; border-radius: 20px; letter-spacing: 1px;
         }
+
+        /* PREÇO COMPONENTE */
+        .price-container {
+            margin: 15px 0 25px 0;
+        }
+        .price-label {
+            font-size: 14px;
+            color: var(--white-sec);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 54px;
+            color: var(--white-main);
+            line-height: 1;
+            margin-top: 5px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .price-value span {
+            color: #22c55e;
+        }
         
         /* GARANTIA DENTRO DA OFERTA */
         .guarantee { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
         .guarantee-icon { font-size: 32px; margin-bottom: 12px; }
         .guarantee h3 { font-size: 20px; margin-bottom: 8px; }
         .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.5; }
+
+        /* === 8. SEÇÃO FAQ ACORDEÃO === */
+        .faq-section {
+            margin-top: 40px;
+        }
+        .faq-item {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .faq-trigger {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            color: var(--white-main);
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-body);
+        }
+        .faq-icon {
+            font-size: 12px;
+            color: var(--red-main);
+            transition: transform 0.3s ease;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            padding: 0 20px;
+            color: var(--white-sec);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        /* Estados ativos controlados via JS */
+        .faq-item.active {
+            border-color: rgba(193, 18, 31, 0.4);
+            background: #121212;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-item.active .faq-content {
+            padding-bottom: 18px;
+        }
 
         /* === 9. FOOTER INSTITUCIONAL === */
         .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
@@ -243,7 +319,7 @@
 </head>
 <body>
 
-    <!-- BARRA SUPERIOR AJUSTADA -->
+    <!-- BARRA SUPERIOR -->
     <div class="top-bar">
         <span>⚠️</span> ESPERE
     </div>
@@ -263,11 +339,10 @@
         
         <section class="hero scroll-reveal active">
             
-            <!-- SINALIZAÇÃO VERDE DE APROVAÇÃO (SVG CORRIGIDO) -->
+            <!-- SINALIZAÇÃO VERDE DE APROVAÇÃO (CORRIGIDA) -->
             <div class="purchase-approved">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="17 9 11 15 7 11"></polyline>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Sua compra foi aprovada!
             </div>
@@ -344,13 +419,19 @@
 
         <div class="section-divider"></div>
 
+        <!-- SEÇÃO DE OFERTA PRINCIPAL CONFIGURADA -->
         <section class="offer-box scroll-reveal" id="oferta">
             
-            <h2 style="color: #fff; font-size: 28px; margin-bottom: 20px; font-family: var(--font-heading);">
+            <h2 style="color: #fff; font-size: 28px; font-family: var(--font-heading);">
                 MÉTODO DA CONEXÃO MASCULINA
             </h2>
 
-            <a href="LINK_DE_UPSELL_AQUI" class="btn" style="margin-bottom: 15px;">Adicionar ao meu pedido por apenas R$ 47,90</a>
+            <div class="price-container">
+                <p class="price-label">Por apenas</p>
+                <p class="price-value"><span>R$</span> 47,90</p>
+            </div>
+
+            <a href="LINK_DE_UPSELL_AQUI" class="btn" style="margin-bottom: 15px;">Quero o método por R$ 47,90</a>
             
             <!-- DOWNSELL NA OFERTA -->
             <a href="LINK_DE_DOWNSELL_AQUI" class="downsell-btn">Não, obrigado. Eu não quero aprender a criar conexão profunda e prefiro continuar como estou.</a>
@@ -359,6 +440,53 @@
                 <div class="guarantee-icon">🛡️</div>
                 <h3>Garantia Mantida</h3>
                 <p>Assim como na sua primeira compra, este material adicional está coberto pela nossa garantia incondicional. Se não gostar, basta solicitar o reembolso.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEÇÃO DE PERGUNTAS FREQUENTES (FAQ ACCORDION) -->
+        <section class="faq-section scroll-reveal">
+            <h2 class="section-title">Dúvidas <span>Frequentes</span></h2>
+            
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>O que é o Método da Conexão Masculina?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>É um treinamento completo em formato digital focado em inteligência social e dinâmicas de conversação. Ele ensina o passo a passo prático para estruturar conversas atraentes, criar conexões emocionais autênticas e progredir os seus relacionamentos sem parecer forçado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>Como vou receber o acesso ao material?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>O acesso é 100% imediato. Como o seu pagamento principal já foi aprovado, assim que adicionar esta extensão, os dados de login e todos os módulos adicionais serão enviados automaticamente para o seu e-mail cadastrado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>Eu sou muito tímido, isso funciona para mim?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Sim, com certeza. O método foi desenvolvido justamente para quem sente dificuldades em manter o assunto fluindo ou trava na hora de flertar. As técnicas dão um roteiro mental simples para você nunca mais ficar sem o que falar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>E se eu não gostar do conteúdo?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Não há risco nenhum. Você conta com a nossa garantia incondicional de reembolso. Se por qualquer motivo achar que o material não gerou valor para você, basta solicitar a devolução dentro do prazo e devolvemos o valor integralmente.</p>
+                </div>
             </div>
         </section>
 
@@ -371,7 +499,7 @@
     </div>
 
     <script>
-        // SCROLL REVEAL (Mais responsivo)
+        // SCROLL REVEAL
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -383,6 +511,30 @@
                 }
             });
         };
+
+        // INTERAÇÃO DO FAQ (ACORDEÃO COMPARTILHADO)
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const trigger = item.querySelector('.faq-trigger');
+            const content = item.querySelector('.faq-content');
+
+            trigger.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
+
+                // Fecha todos os itens abertos automaticamente
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                // Se o item clicado não estava aberto, ele abre agora
+                if (!isOpen) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
 
         // INIT
         window.addEventListener('scroll', revealOnScroll);
