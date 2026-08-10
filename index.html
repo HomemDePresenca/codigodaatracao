@@ -428,6 +428,33 @@
         .emotional-quote h2 { font-size: 46px; line-height: 1; color: #fff; margin-bottom: 16px; }
         .emotional-quote p { font-size: 14px; color: var(--white-sec); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
 
+        /* IDENTIFICAÇÃO (nova seção) */
+        .identify-intro { text-align: center; font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6; margin-bottom: 4px; }
+
+        /* PERCEPÇÃO DE VALOR (nova seção) */
+        .value-stack-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+        .value-stack-list li {
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            font-size: 14px; color: #d1d1d1; font-weight: 300; padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .value-stack-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .value-stack-list .vs-price { color: #666; text-decoration: line-through; white-space: nowrap; font-weight: 400; }
+        .value-stack-total {
+            margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-highlight);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .value-stack-total span:first-child { font-family: var(--font-heading); font-size: 17px; letter-spacing: 1px; color: #fff; }
+        .value-stack-total span:last-child { font-family: var(--font-heading); font-size: 22px; color: #666; text-decoration: line-through; }
+        .value-stack-today { text-align: center; margin-top: 26px; }
+        .value-stack-today .vs-label { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+        .value-stack-today .vs-final { font-family: var(--font-heading); font-size: 44px; color: var(--red-main); margin-top: 6px; line-height: 1; }
+
+        /* CTA INTERMEDIÁRIO (nova seção) */
+        .mid-cta { text-align: center; }
+        .mid-cta p { font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6; margin-bottom: 22px; }
+        .mid-cta p strong { color: #fff; font-weight: 500; }
+
         /* OFFER */
         .offer-box {
             background: #080808; border: 1px solid var(--red-main); padding: 48px 24px; text-align: center;
@@ -491,8 +518,7 @@
             .sticky-cta.visible { transform: translate(-50%, 0); }
         }
     </style>
-    
-    <!-- Meta Pixel Code -->
+
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -507,7 +533,8 @@
     fbq('trackCustom', 'Front');
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"/></noscript>
-</head>
+    
+    </head>
 <body class="lock">
 
     <!-- ==========================================
@@ -567,6 +594,36 @@
                     Desbloquear Acesso
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- ==========================================
+                 SEÇÃO DE IDENTIFICAÇÃO (nova)
+                 Objetivo: fazer o visitante se reconhecer
+                 rapidamente nos problemas listados.
+                 ========================================== -->
+            <section class="identify scroll-reveal">
+                <h2 class="section-title" style="font-size: 32px;">Isso já <br><span>aconteceu com você?</span></h2>
+                <p class="identify-intro">Leia os pontos abaixo com calma. Se você se reconheceu em pelo menos dois, o problema não é você — é a falta de método.</p>
+                <ul class="audience-list" style="margin-top:24px;">
+                    <li>
+                        <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                        Você manda mensagem, ela demora horas para responder — ou simplesmente some sem explicação.
+                    </li>
+                    <li>
+                        <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                        Você sente que está sempre puxando o assunto sozinho, sem retorno na mesma intensidade.
+                    </li>
+                    <li>
+                        <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                        Você já foi chamado de "amigo" quando a intenção sempre foi outra.
+                    </li>
+                    <li>
+                        <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                        Você trava na hora certa e vê a oportunidade escapar bem na sua frente.
+                    </li>
+                </ul>
             </section>
 
             <div class="section-divider"></div>
@@ -714,8 +771,18 @@
                  object-fit: contain para exibir cada print por
                  inteiro, sem cortar conteúdo.
                  ========================================== -->
+
+            <section class="members-preview scroll-reveal">
+                <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
+                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, direto e disponível para consumir no seu ritmo, de qualquer dispositivo.</p>
+                <div class="members-frame">
+                    <div class="browser-bar"><span></span><span></span><span></span></div>
+                    <img src="79245d01-36e7-4931-adc8-ee1f09df994d.jpg" alt="Área de Membros" loading="lazy">
+                </div>
+            </section>
+            
             <section class="proof-carousel scroll-reveal">
-                <span class="eyebrow" style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red-main); margin-bottom:12px; text-align:center; font-weight:600;">Prints Reais • Enviados Pelos Alunos</span>
+                <span class="eyebrow" style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red-main); margin-bottom:12px; text-align:center; font-weight:600;">Prints Reais</span>
                 <h2 class="section-title" style="font-size: 30px;">Resultados na <br><span>Prática</span></h2>
 
                 <div class="carousel-viewport" id="carouselViewport">
@@ -756,14 +823,7 @@
                  Imagem: 79245d01-36e7-4931-adc8-ee1f09df994d.jpg
                  deve estar na MESMA PASTA do arquivo .html
                  ========================================== -->
-            <section class="members-preview scroll-reveal">
-                <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
-                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, direto e disponível para consumir no seu ritmo, de qualquer dispositivo.</p>
-                <div class="members-frame">
-                    <div class="browser-bar"><span></span><span></span><span></span></div>
-                    <img src="79245d01-36e7-4931-adc8-ee1f09df994d.jpg" alt="Área de Membros" loading="lazy">
-                </div>
-            </section>
+            
 
             <!-- ==========================================
                  COMENTÁRIOS / PROVA SOCIAL (Ponto Estratégico)
@@ -932,9 +992,64 @@
 
             <div class="section-divider"></div>
 
+            <!-- ==========================================
+                 CTA INTERMEDIÁRIO (novo)
+                 Objetivo: capturar quem já decidiu comprar
+                 antes de chegar à seção final de oferta.
+                 ========================================== -->
+            <section class="mid-cta scroll-reveal">
+                <p>Você já viu prints reais, a área de membros e o que outros alunos disseram. <strong>As vagas com desconto são limitadas e não voltam ao preço promocional.</strong></p>
+                <a href="#oferta" class="btn">
+                    Garantir Minha Vaga Agora
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </section>
+
+            <div class="section-divider"></div>
+
             <section class="emotional-quote scroll-reveal">
                 <h2>O Jogo é Real.</h2>
                 <p>A única diferença é que a partir de hoje, você dita as regras.</p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- ==========================================
+                 PERCEPÇÃO DE VALOR (nova)
+                 Objetivo: mostrar o valor individual de cada
+                 módulo antes de revelar o preço final, para
+                 reforçar a sensação de economia.
+                 ========================================== -->
+            <section class="value-perception scroll-reveal">
+                <h2 class="section-title" style="font-size: 30px;">Tudo isso, <br><span>por uma fração do valor</span></h2>
+                <div class="card" style="padding: 32px 24px;">
+                    <ul class="value-stack-list">
+                        <li>
+                            <span>Módulo 1 — Arquitetura de Valor</span>
+                            <span class="vs-price">R$ 12,00</span>
+                        </li>
+                        <li>
+                            <span>Módulo 2 — Decodificação</span>
+                            <span class="vs-price">R$ 12,00</span>
+                        </li>
+                        <li>
+                            <span>Módulo 3 — Tensão e Polaridade</span>
+                            <span class="vs-price">R$ 12,00</span>
+                        </li>
+                        <li>
+                            <span>Acesso completo à Área de Membros</span>
+                            <span class="vs-price">R$ 11,90</span>
+                        </li>
+                    </ul>
+                    <div class="value-stack-total">
+                        <span>VALOR TOTAL</span>
+                        <span>R$ 47,90</span>
+                    </div>
+                    <div class="value-stack-today">
+                        <div class="vs-label">Hoje, o pacote completo sai por apenas</div>
+                        <div class="vs-final">R$ 14,70</div>
+                    </div>
+                </div>
             </section>
 
             <section class="offer-box scroll-reveal" id="oferta">
