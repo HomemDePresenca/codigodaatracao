@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Código da Atração | A Ciência do Desejo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -254,6 +254,12 @@
 
         /* HERO */
         .hero { padding: 60px 0 20px; text-align: center; }
+        .hero-brand {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--white-sec); margin-bottom: 18px;
+        }
+        .hero-brand .brand-dot { width: 4px; height: 4px; background: var(--red-main); border-radius: 50%; }
         .hero h1 { font-size: 64px; line-height: 0.85; margin-bottom: 24px; letter-spacing: 2px; }
         .hero h1 span.white { display: block; color: #fff; }
         .hero h1 span.red { display: block; color: var(--red-main); }
@@ -443,6 +449,7 @@
         .guarantee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: left;}
         .guarantee h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
+        .guarantee p + p { margin-top: 10px; }
 
         /* FAQ */
         .faq-item { border-bottom: 1px solid var(--border-subtle); }
@@ -537,16 +544,18 @@
         <div class="wrapper">
             
             <section class="hero scroll-reveal active">
+                <div class="hero-brand">Homem de Presença<span class="brand-dot"></span>Apresenta</div>
                 <h1>
                     <span class="white">Código</span>
                     <span class="red">da Atração</span>
                 </h1>
-                <p class="subheadline">A anatomia silenciosa do desejo. Decodifique os sinais que elas tentam esconder, assuma o controle da dinâmica e torne-se a única opção viável.</p>
+                <p class="subheadline">Pare de mandar mensagem e esperar horas por resposta. Aprenda a ler o interesse real, conduzir a conversa sem parecer carente e sair do "bom dia, boa noite" para um encontro de verdade.</p>
                 
                 <a href="#oferta" class="btn">
                     Desbloquear Acesso
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
+                <p style="font-size: 11.5px; color: #666; margin-top: 14px; letter-spacing: 0.3px;">Menos de R$ 15 · Garantia de 7 dias · Acesso imediato</p>
             </section>
 
             <div class="section-divider"></div>
@@ -925,7 +934,7 @@
                                 <div class="t-avatar">
                                     <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
                                 </div>
-                                <span class="t-name">Rafael M.</span>
+                                <span class="t-name">Bruno T.</span>
                             </div>
                             <div class="t-stars">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
@@ -999,12 +1008,13 @@
                         <span style="background:rgba(193,18,31,0.12); color:var(--red-main); font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:20px; border:1px solid rgba(193,18,31,0.3);">-69% OFF</span>
                     </div>
                     <span class="price-new">R$ 14,70</span>
-                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x de R$5.45 sem juros no cartão</span>
+                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x de R$4,90 sem juros no cartão</span>
                 </div>
 
                 <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
-                    Confirmar Minha Vaga
+                    Confirmar Minha Vaga — R$ 14,70
                 </a>
+                <p style="font-size: 11.5px; color: #666; margin-top: 14px; letter-spacing: 0.3px;">Pagamento único, sem assinatura · Garantia de 7 dias</p>
 
                 <!-- NOVO: selos de segurança perto do CTA final -->
                 <div class="security-badges">
@@ -1018,7 +1028,7 @@
                     </div>
                     <div class="security-item">
                         <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><line x1="2.5" y1="9.5" x2="21.5" y2="9.5"></line></svg>
-                        Cartão em até 4x
+                        Cartão em até 3x
                     </div>
                 </div>
 
@@ -1038,6 +1048,7 @@
                         Garantia Blindada
                     </h3>
                     <p>Você tem <strong>7 dias</strong> para colocar o método à prova. Se você aplicar a engenharia ensinada e achar que não transformou a sua dinâmica social, solicite o reembolso. O risco financeiro é integralmente nosso.</p>
+                    <p>Para solicitar, basta enviar um e-mail para <strong>suporte@homemdepresenca.com</strong> com o e-mail usado na compra — o reembolso é processado em até 5 dias úteis, sem perguntas.</p>
                 </div>
             </section>
 
@@ -1052,7 +1063,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Posso parcelar a compra? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sim. É um pagamento único (não é assinatura) e pode ser feito à vista no Pix ou parcelado em até 4x sem juros no cartão de crédito.</p></div>
+                    <div class="faq-answer"><p>Sim. É um pagamento único (não é assinatura) e pode ser feito à vista no Pix ou parcelado em até 3x sem juros no cartão de crédito.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
@@ -1065,7 +1076,7 @@
             </section>
 
             <footer class="footer scroll-reveal">
-                <p>Homem De Presença © 2024. Todos os direitos reservados.</p>
+                <p>Código da Atração é um produto de Homem de Presença © 2026. Todos os direitos reservados.</p>
                 <p>Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
                 <p><a href="https://HomemDePresenca.github.io/TermosdeUso">Termos de Uso</a> | <a href="https://HomemDePresenca.github.io/PoliticadePrivacidade">Política de Privacidade</a></p>
             </footer>
@@ -1141,6 +1152,15 @@
             }
             skipBtn.addEventListener('click', skip);
 
+            // Falha segura: se por qualquer motivo a animação de intro
+            // travar (ex.: SVG não suportado, erro de layout), garantimos
+            // que a página principal apareça mesmo assim após um tempo
+            // máximo, para nunca deixar o visitante preso na tela de
+            // carregamento sem conseguir ver a oferta.
+            schedule(function(){
+                if (!mainContent.classList.contains('visible')) fadeOutOverlay();
+            }, 4000);
+
             schedule(function(){ startPct(750); }, 0);
             schedule(function(){ skipBtn.classList.add('show'); }, 350);
 
@@ -1159,15 +1179,20 @@
          * - Se faltarem menos de 11 minutos para o próximo :00/:30,
          *   pula para o horário seguinte (evita prazos curtos demais).
          * - O horário de encerramento é calculado UMA ÚNICA VEZ por
-         *   dispositivo (na primeira visita) e gravado no localStorage.
-         *   Em visitas seguintes o valor salvo é reutilizado e NÃO é
-         *   recalculado — o prazo não se estica nem se renova sozinho
-         *   naquele aparelho.
+         *   dispositivo (na primeira visita) e gravado em armazenamento
+         *   persistente quando disponível. Em visitas seguintes o valor
+         *   salvo é reutilizado e NÃO é recalculado — o prazo não se
+         *   estica nem se renova sozinho naquele aparelho.
          * - Quando o tempo chega a zero, o contador para em 00:00:00
          *   e permanece assim (não reinicia automaticamente).
          * - O cálculo do tempo restante usa Date.now() a cada tick,
          *   em vez de decrementar um contador, para não perder
          *   precisão quando a aba fica em segundo plano.
+         * - Todo acesso a localStorage é protegido: navegadores in-app
+         *   (Instagram/Facebook) e modo privado podem bloquear ou lançar
+         *   erro nesse acesso. Se isso acontecer, caímos para um valor
+         *   em memória, garantindo que o restante da página (inclusive
+         *   o carrossel de prints) continue funcionando normalmente.
          */
         function initCountdown() {
             const hBox = document.getElementById('t-hours');
@@ -1178,6 +1203,21 @@
             const tbExactBox = document.getElementById('tb-exact');
             const storageKey = 'codigo_atracao_expiration_v2';
             const MIN_MS = 11 * 60 * 1000;
+
+            function safeGetStorage(key) {
+                try {
+                    return window.localStorage.getItem(key);
+                } catch (e) {
+                    return null;
+                }
+            }
+            function safeSetStorage(key, value) {
+                try {
+                    window.localStorage.setItem(key, value);
+                } catch (e) {
+                    /* armazenamento indisponível — segue apenas em memória */
+                }
+            }
 
             function getNextHalfHour(from) {
                 const d = new Date(from.getTime());
@@ -1202,13 +1242,15 @@
 
             // Identifica a visita: só calcula um novo horário se este
             // dispositivo ainda não tiver um valor salvo. Depois disso,
-            // o horário fica fixo neste dispositivo.
-            let targetTime = localStorage.getItem(storageKey);
+            // o horário fica fixo neste dispositivo (quando o
+            // armazenamento persistente está disponível).
+            let targetTime = safeGetStorage(storageKey);
             if (targetTime === null) {
                 targetTime = computeTarget();
-                localStorage.setItem(storageKey, String(targetTime));
+                safeSetStorage(storageKey, String(targetTime));
             } else {
                 targetTime = parseInt(targetTime, 10);
+                if (isNaN(targetTime)) targetTime = computeTarget();
             }
 
             // Exibe o horário exato de encerramento em um ponto
@@ -1402,8 +1444,26 @@
             resetAuto();
         }
 
+        // Cada widget é inicializado de forma independente: se um deles
+        // falhar por qualquer motivo inesperado, os demais continuam
+        // funcionando normalmente (o carrossel de prints não pode parar
+        // de funcionar por causa de uma falha no timer, e vice-versa).
+        function safeInit(fn, label) {
+            try {
+                fn();
+            } catch (e) {
+                if (window.console && console.warn) {
+                    console.warn('Falha ao iniciar ' + label + ':', e);
+                }
+            }
+        }
+
         window.addEventListener('scroll', handleStickyVisibility, { passive: true });
-        window.addEventListener('load', () => { initCountdown(); revealOnScroll(); initProofCarousel(); });
+        window.addEventListener('load', () => {
+            safeInit(initCountdown, 'contador de oferta');
+            safeInit(revealOnScroll, 'revelação ao rolar');
+            safeInit(initProofCarousel, 'carrossel de prints');
+        });
     </script>
 </body>
 </html>
