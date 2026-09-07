@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Código da Atração | A Ciência do Desejo</title>
@@ -43,7 +43,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding-top: 40px; 
+            padding-top: 64px; 
         }
 
         /* Bloqueio de rolagem durante a animação */
@@ -60,7 +60,7 @@
             position: fixed; inset: 0; z-index: 99999;
             background: radial-gradient(circle at 50% 40%, #0a0102 0%, var(--bg-deep) 80%);
             display: flex; align-items: center; justify-content: center;
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
         }
         #intro-overlay.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -103,21 +103,21 @@
 
         #suit-svg {
             width: 100%; height: 100%; display: block; transform-style: preserve-3d;
-            animation: spinIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: spinIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @keyframes spinIn {
-            0% { transform: rotateY(-90deg) scale(0.85); opacity: 0; filter: blur(5px); }
+            0% { transform: rotateY(-90deg) scale(0.85); opacity: 0; filter: blur(2px); }
             100% { transform: rotateY(0deg) scale(1); opacity: 1; filter: blur(0px); }
         }
 
         .draw {
             fill: none; stroke: rgba(255,255,255,0.15); stroke-width: 1.8;
             stroke-linecap: round; stroke-linejoin: round;
-            transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease, stroke 1s ease;
+            transition: stroke-dashoffset 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease, stroke 0.5s ease;
         }
         .draw.accent { stroke: var(--red-main); stroke-width: 2.2; }
 
-        #hBarL, #hBarR { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
+        #hBarL, #hBarR { transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
         #hBarL.split { transform: translateX(-90px); }
         #hBarR.split { transform: translateX(90px); }
         #crossbar { stroke: var(--red-main); stroke-width: 2.5; transition: opacity 0.5s ease; }
@@ -129,7 +129,7 @@
         }
         .reveal-text {
             opacity: 0; transform: scale(0.9);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
             color: var(--white-main); font-family: var(--font-heading);
             letter-spacing: 3px; font-size: clamp(22px, 6vw, 32px); text-align: center; white-space: nowrap;
         }
@@ -137,17 +137,16 @@
         .reveal-text .big-h { color: var(--red-main); font-size: 1.6em; }
         .reveal-rule {
             width: 0; height: 1px; background: var(--red-dusk); margin-top: 8px;
-            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
         }
         .reveal-rule.show { width: 140px; }
 
         .skip-btn {
             position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); right: 24px;
             font-family: monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-            color: var(--white-sec); background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle);
+            color: var(--white-sec); background: rgba(0,0,0,0.6); border: 1px solid var(--border-subtle);
             padding: 8px 16px; border-radius: 4px; cursor: pointer; opacity: 0; z-index: 2;
             transition: opacity 0.8s ease, color 0.3s, border-color 0.3s;
-            backdrop-filter: blur(4px);
         }
         .skip-btn.show { opacity: 0.7; }
         .skip-btn:active { color: var(--red-main); border-color: var(--red-main); }
@@ -167,6 +166,7 @@
             position: absolute; top: -15%; left: 50%; width: 120vw; height: 50vh;
             background: radial-gradient(ellipse, rgba(193, 18, 31, 0.05) 0%, transparent 70%);
             pointer-events: none; animation: drift 20s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
         @keyframes drift {
@@ -176,16 +176,30 @@
 
         /* PARTÍCULAS GEOMÉTRICAS */
         .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
-        .particle {
-            position: absolute; color: var(--red-main); opacity: 0; font-family: monospace; font-size: 10px;
-            animation: floatSymbol infinite linear;
-        }
+        .particle { position: absolute; color: var(--red-main); opacity: 0; font-family: monospace; font-size: 10px; animation: floatSymbol infinite linear; will-change: transform, opacity; }
         .p1 { left: 15%; animation-duration: 25s; font-size: 12px; animation-delay: 0s; }
         .p2 { left: 85%; animation-duration: 30s; font-size: 14px; animation-delay: 4s; }
         .p3 { left: 45%; animation-duration: 28s; font-size: 10px; animation-delay: 8s; opacity: 0.05;}
         .p4 { left: 75%; animation-duration: 35s; font-size: 12px; animation-delay: 2s; }
         .p5 { left: 20%; animation-duration: 32s; font-size: 14px; animation-delay: 12s; }
         .p6 { left: 60%; animation-duration: 22s; font-size: 10px; animation-delay: 6s; }
+
+        /* Em telas pequenas (proxy comum de aparelhos mais simples),
+           reduzimos o numero de particulas simultaneas rodando para
+           sempre, sem remover o efeito visual como um todo. */
+        @media (max-width: 380px) {
+            .p3, .p5 { display: none; }
+        }
+
+        /* Respeita quem pediu menos movimento no sistema operacional
+           e, de quebra, alivia bastante o trabalho continuo da GPU
+           em aparelhos mais limitados. Nada de conteudo é alterado,
+           apenas a intensidade das animações decorativas. */
+        @media (prefers-reduced-motion: reduce) {
+            .grid-bg-intro, .particle, .ambient-glow, .btn::before, .pulse-dot {
+                animation: none !important;
+            }
+        }
 
         @keyframes floatSymbol {
             0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
@@ -200,16 +214,13 @@
         }
 
         /* LAYOUT GERAL */
-        #main-content { opacity: 0; transition: opacity 0.8s ease; }
+        #main-content { opacity: 0; transition: opacity 0.5s ease; }
         #main-content.visible { opacity: 1; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative; }
 
         h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1.5px; }
 
-        .section-divider {
-            width: 100px; height: 1px; margin: 60px auto;
-            background: linear-gradient(90deg, transparent, rgba(193,18,31,.5), transparent);
-        }
+        .section-divider { width: 100px; height: 1px; margin: 60px auto; background: linear-gradient(90deg, transparent, rgba(193,18,31,.5), transparent); }
 
         .section-title { font-size: 38px; text-align: center; margin-bottom: 24px; color: var(--white-main); line-height: 1.1; }
         .section-title span { color: var(--red-main); }
@@ -223,16 +234,22 @@
         /* URGENCY BAR */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10, 0, 0, 0.95); backdrop-filter: blur(10px);
+            background: rgba(10, 0, 0, 0.97); backdrop-filter: blur(4px);
             border-bottom: 1px solid rgba(193, 18, 31, 0.2);
-            color: #d1d1d1; text-align: center; font-size: 11px; font-weight: 500;
-            padding: 12px 20px; z-index: 1000; letter-spacing: 1px; text-transform: uppercase;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            color: #d1d1d1; text-align: center;
+            padding: 8px 16px; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px;
         }
-        .pulse-dot {
-            width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%;
-            box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate;
+        .top-bar-row {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
         }
+        .top-bar-row strong { color: var(--red-main); font-family: var(--font-heading); letter-spacing: 1px; font-size: 13px; font-weight: 400; }
+        .top-bar-sub {
+            font-size: 10px; color: #999; font-weight: 400; letter-spacing: 0.3px;
+        }
+        .top-bar-sub strong { color: var(--red-main); font-weight: 600; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%; box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate; flex-shrink: 0; }
         @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
         /* HERO */
@@ -251,170 +268,110 @@
         }
         .btn:hover { background: #d61826; box-shadow: 0 15px 40px rgba(193, 18, 31, 0.25); transform: translateY(-2px); }
         .btn::before {
-            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-25deg); animation: shine 4s infinite;
+            transform: translateX(-150%) skewX(-25deg); animation: shine 4s infinite; will-change: transform;
         }
-        @keyframes shine { 0% { left: -150%; } 20%, 100% { left: 150%; } }
+        @keyframes shine { 0% { transform: translateX(-150%) skewX(-25deg); } 20%, 100% { transform: translateX(150%) skewX(-25deg); } }
         .btn:active { transform: scale(0.98); }
 
         /* TIMELINE */
         .timeline { position: relative; padding-left: 28px; margin-top: 30px; }
-        .timeline::before {
-            content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 1px;
-            background: linear-gradient(to bottom, var(--red-main), rgba(193,18,31,0.05));
-        }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 1px; background: linear-gradient(to bottom, var(--red-main), rgba(193,18,31,0.05)); }
         .timeline-item { position: relative; margin-bottom: 35px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -24px; top: 6px; width: 7px; height: 7px;
-            background: var(--bg-deep); border: 1px solid var(--red-main); transform: rotate(45deg); box-shadow: 0 0 10px rgba(193,18,31,0.5);
-        }
+        .timeline-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 7px; height: 7px; background: var(--bg-deep); border: 1px solid var(--red-main); transform: rotate(45deg); box-shadow: 0 0 10px rgba(193,18,31,0.5); }
         .timeline-item h4 { font-family: var(--font-body); color: #fff; font-size: 15px; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .timeline-item p { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
 
         /* COPY */
         .story-section p { font-size: 15px; color: var(--white-sec); margin-bottom: 24px; line-height: 1.7; font-weight: 300; }
         .story-section p strong { color: #fff; font-weight: 500; }
-        .highlight-box {
-            background: transparent; border-left: 2px solid var(--red-main); padding: 20px 24px; margin: 40px 0;
-            font-style: italic; color: #d1d1d1; font-size: 16px; line-height: 1.6; font-weight: 300; position: relative;
-        }
+        .highlight-box { background: transparent; border-left: 2px solid var(--red-main); padding: 20px 24px; margin: 40px 0; font-style: italic; color: #d1d1d1; font-size: 16px; line-height: 1.6; font-weight: 300; position: relative; }
         .target-list { list-style: none; padding: 0; margin-top: 32px; border-top: 1px solid var(--border-subtle); padding-top: 32px; }
         .target-list li { position: relative; padding-left: 28px; margin-bottom: 20px; font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
         .target-list li::before { content: '✖'; position: absolute; left: 0; top: 8px; width: 12px; height: 1px; background: var(--red-main); }
 
         /* MÓDULOS */
-        .card {
-            background: rgba(255,255,255,0.01); border: 1px solid var(--border-subtle); padding: 32px 24px; margin-bottom: 16px;
-            position: relative; overflow: hidden; transition: border-color 0.4s ease; border-radius: 6px;
-        }
+        .card { background: rgba(255,255,255,0.01); border: 1px solid var(--border-subtle); padding: 32px 24px; margin-bottom: 16px; position: relative; overflow: hidden; transition: border-color 0.4s ease; border-radius: 6px; }
         .card:hover { border-color: var(--border-highlight); }
         .card h3 { font-family: var(--font-body); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; color: #fff; }
         .card p { font-size: 14px; color: var(--white-sec); line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
         .card-insight { font-size: 12px; color: #777; border-top: 1px solid var(--border-subtle); padding-top: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* SCIENCE */
-        .science-box {
-            text-align: center; padding: 50px 24px; background: #060606; border: 1px solid var(--border-subtle); border-radius: 6px;
-        }
+        .science-box { text-align: center; padding: 50px 24px; background: #060606; border: 1px solid var(--border-subtle); border-radius: 6px; }
         .science-box p { font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; margin-top: 16px; }
 
-        /* =========================================
-           CARROSSEL DE PRINTS (RESULTADOS)
-           ========================================= */
+        /* CARROSSEL DE PRINTS (RESULTADOS) */
         .proof-carousel { margin-top: 20px; }
         .carousel-viewport {
             position: relative; width: 100%; max-width: 320px; margin: 32px auto 0;
             overflow: hidden; border-radius: 16px; border: 1px solid var(--border-subtle);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            /* Altura relativa ao card, não à imagem: cada print é exibido inteiro por dentro (object-fit: contain) */
             aspect-ratio: 4/5; background: #0a0a0a;
         }
-        .carousel-track {
-            display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-        }
-        .carousel-slide {
-            min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(160deg, #0f0f0f, #050505);
-        }
-        /* object-fit: contain garante que a imagem inteira apareça, sem cortar conteúdo,
-           mesmo com proporções diferentes entre os prints (retrato ou quase-quadrado) */
+        .carousel-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        .carousel-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #0f0f0f, #050505); }
         .carousel-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
-        .carousel-placeholder {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 10px; color: var(--white-sec); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 20px; text-align: center;
-        }
+        .carousel-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--white-sec); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 20px; text-align: center; }
         .carousel-placeholder svg { width: 32px; height: 32px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
 
-        .carousel-controls {
-            display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 24px;
-        }
-        .carousel-arrow {
-            width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-highlight);
-            background: rgba(193,18,31,0.05); color: var(--red-main); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: background 0.3s ease, transform 0.2s ease;
-        }
+        .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 24px; }
+        .carousel-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-highlight); background: rgba(193,18,31,0.05); color: var(--red-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; }
         .carousel-arrow:active { transform: scale(0.92); background: rgba(193,18,31,0.15); }
         .carousel-arrow svg { width: 18px; height: 18px; }
         .carousel-dots { display: flex; gap: 8px; }
-        .carousel-dot {
-            width: 6px; height: 6px; border-radius: 50%; background: var(--border-subtle);
-            border: 1px solid rgba(193,18,31,0.2); cursor: pointer; transition: all 0.3s ease;
-        }
+        .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-subtle); border: 1px solid rgba(193,18,31,0.2); cursor: pointer; transition: all 0.3s ease; }
         .carousel-dot.active { background: var(--red-main); width: 18px; border-radius: 3px; border-color: var(--red-main); }
 
-        /* =========================================
-           ÁREA DE MEMBROS (IMAGEM ÚNICA)
-           ========================================= */
+        /* ÁREA DE MEMBROS (IMAGEM ÚNICA) */
         .members-preview { margin-top: 20px; text-align: center; }
-        .members-frame {
-            margin-top: 28px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a;
-        }
-        .members-frame .browser-bar {
-            display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle);
-        }
+        .members-frame { margin-top: 28px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a; }
+        .members-frame .browser-bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle); }
         .browser-bar span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
         .browser-bar span:nth-child(1) { background: #C1121F; }
         .members-frame img { width: 100%; display: block; }
-        .members-placeholder {
-            width: 100%; aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 12px; color: var(--white-sec); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
-        }
+        .members-placeholder { width: 100%; aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--white-sec); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .members-placeholder svg { width: 36px; height: 36px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
 
-        /* =========================================
-           PARA QUEM É (PÚBLICO-ALVO)
-           ========================================= */
+        /* PARA QUEM É (PÚBLICO-ALVO) */
         .audience-list { list-style: none; padding: 0; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
-        .audience-list li {
-            display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; color: #d1d1d1; line-height: 1.6; font-weight: 400;
-            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); padding: 16px 18px; border-radius: 6px;
-            transition: border-color 0.3s ease;
-        }
+        .audience-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 14.5px; color: #d1d1d1; line-height: 1.6; font-weight: 400; background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); padding: 16px 18px; border-radius: 6px; transition: border-color 0.3s ease; }
         .audience-list li:active { border-color: var(--border-highlight); }
-        .audience-check {
-            flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(193,18,31,0.1);
-            display: flex; align-items: center; justify-content: center; margin-top: 1px;
-        }
+        .audience-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(193,18,31,0.1); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
         .audience-check svg { width: 12px; height: 12px; stroke: var(--red-main); stroke-width: 3; fill: none; }
 
-        /* =========================================
-           RESULTADOS ESPECÍFICOS
-           ========================================= */
+        /* RESULTADOS ESPECÍFICOS */
         .outcomes-list { list-style: none; padding: 0; margin-top: 28px; display: flex; flex-direction: column; gap: 18px; }
         .outcomes-list li { display: flex; gap: 14px; align-items: flex-start; }
-        .outcomes-num {
-            flex-shrink: 0; width: 26px; height: 26px; border: 1px solid var(--red-main); color: var(--red-main);
-            font-family: var(--font-heading); font-size: 14px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; margin-top: 1px;
-        }
+        .outcomes-num { flex-shrink: 0; width: 26px; height: 26px; border: 1px solid var(--red-main); color: var(--red-main); font-family: var(--font-heading); font-size: 14px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-top: 1px; }
         .outcomes-list p { font-size: 14.5px; color: #d1d1d1; line-height: 1.6; font-weight: 300; margin: 0; }
         .outcomes-list p strong { color: #fff; font-weight: 500; }
 
-        /* =========================================
-           SEÇÃO DE COMENTÁRIOS / PROVA SOCIAL
-           ========================================= */
+        /* SEÇÃO DE COMENTÁRIOS / PROVA SOCIAL */
         .social-proof { margin-top: 20px; padding: 20px 0; }
-        .social-proof .eyebrow {
-            display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--red-main); margin-bottom: 12px; text-align: center; font-weight: 600;
+        .social-proof .eyebrow { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--red-main); margin-bottom: 12px; text-align: center; font-weight: 600; }
+
+        /* NOVO: barra de números / prova social quantitativa */
+        .trust-stats {
+            display: flex; justify-content: center; align-items: stretch; gap: 0;
+            margin: 24px auto 8px; max-width: 360px;
+            border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden;
+            background: rgba(255,255,255,0.015);
         }
+        .trust-stat { flex: 1; text-align: center; padding: 18px 10px; }
+        .trust-stat + .trust-stat { border-left: 1px solid var(--border-subtle); }
+        .trust-num { display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-heading); font-size: 28px; color: var(--red-main); letter-spacing: 1px; line-height: 1; }
+        .trust-num svg { width: 16px; height: 16px; fill: var(--red-main); }
+        .trust-label { display: block; font-size: 10px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; font-weight: 500; line-height: 1.4; }
+
         .testimonials-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle);
-            padding: 24px; border-radius: 6px; backdrop-filter: blur(5px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
+        .testimonial-card { background: rgba(15, 15, 15, 0.75); border: 1px solid var(--border-subtle); padding: 24px; border-radius: 6px; transition: transform 0.3s ease, border-color 0.3s ease; }
         .testimonial-card:active { border-color: var(--border-highlight); transform: scale(0.98); }
         
         .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .t-user-info { display: flex; align-items: center; gap: 12px; }
-        .t-avatar {
-            width: 36px; height: 36px; border-radius: 50%; background: #111;
-            display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(193, 18, 31, 0.2);
-        }
+        .t-avatar { width: 36px; height: 36px; border-radius: 50%; background: #111; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(193, 18, 31, 0.2); }
         .t-avatar svg { width: 20px; height: 20px; stroke: #777; stroke-width: 1.5; }
         .t-name { font-size: 14px; font-weight: 500; color: var(--white-main); font-family: var(--font-body); }
         .t-stars { display: flex; gap: 2px; }
@@ -428,38 +385,28 @@
         .emotional-quote h2 { font-size: 46px; line-height: 1; color: #fff; margin-bottom: 16px; }
         .emotional-quote p { font-size: 14px; color: var(--white-sec); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* IDENTIFICAÇÃO (nova seção) */
+        /* IDENTIFICAÇÃO */
         .identify-intro { text-align: center; font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6; margin-bottom: 4px; }
 
-        /* PERCEPÇÃO DE VALOR (nova seção) */
+        /* PERCEPÇÃO DE VALOR */
         .value-stack-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-        .value-stack-list li {
-            display: flex; justify-content: space-between; align-items: center; gap: 12px;
-            font-size: 14px; color: #d1d1d1; font-weight: 300; padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
+        .value-stack-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #d1d1d1; font-weight: 300; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle); }
         .value-stack-list li:last-child { border-bottom: none; padding-bottom: 0; }
         .value-stack-list .vs-price { color: #666; text-decoration: line-through; white-space: nowrap; font-weight: 400; }
-        .value-stack-total {
-            margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-highlight);
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .value-stack-total { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-highlight); display: flex; justify-content: space-between; align-items: center; }
         .value-stack-total span:first-child { font-family: var(--font-heading); font-size: 17px; letter-spacing: 1px; color: #fff; }
         .value-stack-total span:last-child { font-family: var(--font-heading); font-size: 22px; color: #666; text-decoration: line-through; }
         .value-stack-today { text-align: center; margin-top: 26px; }
         .value-stack-today .vs-label { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
         .value-stack-today .vs-final { font-family: var(--font-heading); font-size: 44px; color: var(--red-main); margin-top: 6px; line-height: 1; }
 
-        /* CTA INTERMEDIÁRIO (nova seção) */
+        /* CTA INTERMEDIÁRIO */
         .mid-cta { text-align: center; }
         .mid-cta p { font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6; margin-bottom: 22px; }
         .mid-cta p strong { color: #fff; font-weight: 500; }
 
         /* OFFER */
-        .offer-box {
-            background: #080808; border: 1px solid var(--red-main); padding: 48px 24px; text-align: center;
-            position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 6px;
-        }
+        .offer-box { background: #080808; border: 1px solid var(--red-main); padding: 48px 24px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 6px; }
         .offer-box::before {
             content: 'ACESSO RESTRITO LIBERADO'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
             background: var(--bg-deep); border: 1px solid var(--red-main); color: var(--red-main); font-size: 10px; font-weight: 600;
@@ -468,12 +415,29 @@
         .price-container { margin-bottom: 32px; display: flex; flex-direction: column; gap: 8px; }
         .price-old { font-size: 14px; text-decoration: line-through; color: #666; text-transform: uppercase; letter-spacing: 1px;}
         .price-new { font-size: 56px; color: #fff; font-family: var(--font-heading); line-height: 1; }
+
+        /* NOVO: selos de segurança perto do CTA final */
+        .security-badges {
+            display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap;
+        }
+        .security-item {
+            display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: #999;
+            text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600;
+            border: 1px solid var(--border-subtle); border-radius: 20px; padding: 7px 12px;
+            background: rgba(255,255,255,0.015);
+        }
+        .security-item svg { width: 13px; height: 13px; stroke: var(--red-main); fill: none; stroke-width: 2; flex-shrink: 0; }
         
         .timer-wrapper { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .timer-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; }
         .timer-boxes { display: flex; align-items: center; gap: 12px; }
         .timer-box { background: transparent; border-bottom: 1px solid var(--red-main); padding: 8px 12px; font-family: var(--font-heading); font-size: 28px; color: #fff; }
         .timer-sep { color: #444; font-size: 20px; font-weight: 300; }
+        .timer-exact {
+            font-size: 12.5px; color: #999; font-weight: 400; text-align: center;
+            letter-spacing: 0.3px; line-height: 1.5;
+        }
+        .timer-exact strong { color: var(--red-main); font-weight: 600; }
 
         /* GARANTIA */
         .guarantee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: left;}
@@ -482,11 +446,7 @@
 
         /* FAQ */
         .faq-item { border-bottom: 1px solid var(--border-subtle); }
-        .faq-question {
-            width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-size: 14px;
-            font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.5px;
-            color: #ccc; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none;
-        }
+        .faq-question { width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-size: 14px; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.5px; color: #ccc; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none; }
         .faq-icon { color: var(--red-main); font-size: 18px; transition: transform 0.4s ease; font-weight: 300; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; }
         .faq-answer p { padding-bottom: 24px; }
@@ -502,7 +462,7 @@
         /* STICKY CTA */
         .sticky-cta {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
+            background: rgba(3, 3, 3, 0.97); backdrop-filter: blur(4px);
             border-top: 1px solid rgba(193, 18, 31, 0.1); padding: 16px 24px;
             z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -511,33 +471,156 @@
 
         @media (min-width: 501px) {
             .wrapper { max-width: 500px; }
-            .sticky-cta {
-                left: 50%; transform: translate(-50%, 100%); max-width: 500px;
-                border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle);
-            }
+            .sticky-cta { left: 50%; transform: translate(-50%, 100%); max-width: 500px; border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle); }
             .sticky-cta.visible { transform: translate(-50%, 0); }
+        }
+
+        /* =========================================
+           QUIZ / DIAGNÓSTICO (FUNIL DE ENTRADA)
+           ========================================= */
+        .quiz-overlay {
+            position: fixed; inset: 0; z-index: 999999;
+            background: radial-gradient(circle at 50% 20%, #0a0102 0%, var(--bg-deep) 75%);
+            display: flex; flex-direction: column;
+            opacity: 1; visibility: visible;
+            transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), visibility 0.45s;
+        }
+        .quiz-overlay.quiz-hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .quiz-top {
+            display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+            padding: max(18px, env(safe-area-inset-top)) 20px 14px;
+        }
+        .quiz-back {
+            width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white-main); cursor: pointer;
+            transition: opacity 0.25s ease, border-color 0.25s ease;
+        }
+        .quiz-back svg { width: 16px; height: 16px; }
+        .quiz-back[data-hidden="true"] { opacity: 0; pointer-events: none; }
+        .quiz-back:active { border-color: var(--border-highlight); }
+
+        .quiz-progress-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+        .quiz-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 0.6s cubic-bezier(0.65,0,0.35,1); }
+
+        .quiz-body {
+            flex: 1; display: flex; flex-direction: column; overflow-y: auto;
+            padding: 10px 24px calc(40px + env(safe-area-inset-bottom));
+            -webkit-overflow-scrolling: touch;
+        }
+        .quiz-step {
+            margin: auto auto; width: 100%; max-width: 440px;
+            opacity: 0; transform: translateY(18px) scale(0.985);
+            transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
+            filter: blur(4px);
+            will-change: opacity, transform;
+        }
+        .quiz-step.in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .quiz-step.out {
+            opacity: 0; transform: translateY(-12px) scale(0.985); filter: blur(3px);
+            transition: opacity 0.28s cubic-bezier(0.4,0,1,1), transform 0.28s cubic-bezier(0.4,0,1,1), filter 0.28s ease;
+        }
+
+        .quiz-eyebrow { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--red-main); margin-bottom: 14px; font-weight: 600; text-align: center; }
+        .quiz-title { font-family: var(--font-heading); font-size: 28px; line-height: 1.08; letter-spacing: 1px; text-align: center; color: #fff; margin-bottom: 14px; }
+        .quiz-title.left { text-align: left; font-size: 22px; }
+        .quiz-title span { color: var(--red-main); }
+        .quiz-sub { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; text-align: center; margin-bottom: 26px; }
+
+        /* Ícone temático de cada pergunta — reforço visual, sem poluir o layout */
+        .quiz-q-icon { display: flex; justify-content: flex-start; margin-bottom: 14px; opacity: 0; transform: scale(0.7) rotate(-8deg); animation: quizIconPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.05s forwards; }
+        .quiz-q-icon.centered { justify-content: center; }
+        .quiz-q-icon-badge {
+            width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+            background: rgba(193,18,31,0.08); border: 1px solid var(--border-highlight);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .quiz-q-icon-badge svg { width: 22px; height: 22px; stroke: var(--red-main); fill: none; stroke-width: 1.6; }
+        @keyframes quizIconPop { to { opacity: 1; transform: scale(1) rotate(0deg); } }
+
+        .quiz-options { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+        .quiz-opt {
+            display: flex; align-items: center; gap: 14px; text-align: left; width: 100%;
+            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); border-radius: 8px;
+            padding: 18px 16px; color: #d1d1d1; font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.5;
+            cursor: pointer; transition: border-color 0.3s ease, background 0.3s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+            opacity: 0; transform: translateY(10px);
+            animation: quizOptIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+        @keyframes quizOptIn { to { opacity: 1; transform: translateY(0); } }
+        .quiz-opt-dot { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--red-main); position: relative; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+        .quiz-opt-dot::after { content: ''; position: absolute; inset: 3px; background: var(--red-main); border-radius: 50%; transform: scale(0); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+        .quiz-opt.selected .quiz-opt-dot::after { transform: scale(1); }
+        .quiz-opt.selected .quiz-opt-dot { transform: scale(1.12); }
+        .quiz-opt.selected { border-color: var(--border-highlight); background: rgba(193,18,31,0.06); }
+        .quiz-opt:active { transform: scale(0.98); }
+
+        .quiz-info-icon { display: flex; justify-content: center; margin-bottom: 18px; opacity: 0; transform: scale(0.7); animation: quizIconPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.05s forwards; }
+        .quiz-info-icon svg { width: 34px; height: 34px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
+        .quiz-info-box { background: transparent; border-left: 2px solid var(--red-main); padding: 16px 20px; margin: 6px 0 30px; font-style: italic; color: #d1d1d1; font-size: 14.5px; line-height: 1.6; font-weight: 300; }
+
+        .quiz-cta { display: flex; justify-content: center; margin-top: 6px; }
+
+        /* Barra de progresso mini (bolinhas) — dá noção visual de quantas perguntas faltam */
+        .quiz-dots-track { display: flex; justify-content: center; gap: 6px; margin-bottom: 22px; }
+        .quiz-dots-track .qd { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: background 0.3s ease, transform 0.3s ease; }
+        .quiz-dots-track .qd.done { background: var(--red-main); }
+        .quiz-dots-track .qd.current { background: var(--red-main); transform: scale(1.4); }
+
+        .quiz-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; flex: 1; }
+        .quiz-loading-ring-wrap { position: relative; width: 84px; height: 84px; margin-bottom: 28px; display: flex; align-items: center; justify-content: center; }
+        .quiz-loading-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(193,18,31,0.12); border-top-color: var(--red-main); animation: quizspin 1.1s cubic-bezier(0.65,0.05,0.36,1) infinite; }
+        .quiz-loading-ring.ring-2 { inset: 10px; border-top-color: transparent; border-right-color: rgba(193,18,31,0.35); animation-duration: 1.6s; animation-direction: reverse; }
+        .quiz-loading-core { width: 10px; height: 10px; border-radius: 50%; background: var(--red-main); box-shadow: 0 0 14px var(--red-main); animation: quizpulse 1.1s ease-in-out infinite; }
+        @keyframes quizspin { to { transform: rotate(360deg); } }
+        @keyframes quizpulse { 0%,100% { opacity: 0.55; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.15); } }
+        .quiz-loading-pct { font-family: var(--font-heading); font-size: 40px; color: #fff; letter-spacing: 1px; margin-bottom: 10px; transition: opacity 0.2s ease; }
+        .quiz-loading-status { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; min-height: 16px; transition: opacity 0.35s ease, transform 0.35s ease; }
+        .quiz-loading-status.swap { opacity: 0; transform: translateY(4px); }
+
+        .quiz-result-badge { display: flex; justify-content: center; margin-bottom: 16px; opacity: 0; transform: scale(0.6) rotate(-10deg); animation: quizIconPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards; }
+        .quiz-result-badge-ring {
+            width: 66px; height: 66px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(193,18,31,0.16) 0%, rgba(193,18,31,0.02) 70%);
+            border: 1px solid var(--border-highlight);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .quiz-result-badge-ring svg { width: 30px; height: 30px; stroke: var(--red-main); fill: none; stroke-width: 1.6; }
+
+        .quiz-result-score { text-align: center; margin: 8px 0 26px; }
+        .qrs-label { font-size: 11px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display: block; }
+        .qrs-bar-track { height: 8px; border-radius: 8px; background: rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 8px; }
+        .qrs-bar-fill { height: 100%; width: 0%; border-radius: 8px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 1.1s cubic-bezier(0.22,1,0.36,1); }
+        .qrs-bar-pct { font-family: var(--font-heading); font-size: 22px; color: var(--red-main); }
+
+        .quiz-result-list { list-style: none; padding: 0; margin: 6px 0 30px; display: flex; flex-direction: column; gap: 12px; }
+        .quiz-result-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: #c9c9c9; line-height: 1.55; font-weight: 300;
+            opacity: 0; transform: translateX(-8px); animation: quizOptIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .quiz-result-list li svg { flex-shrink: 0; width: 16px; height: 16px; stroke: var(--red-main); fill: none; stroke-width: 2; margin-top: 2px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .quiz-loading-ring, .quiz-loading-ring.ring-2, .quiz-loading-core { animation: none; }
+            .quiz-step, .quiz-step.out, .quiz-opt, .quiz-q-icon, .quiz-info-icon, .quiz-result-badge, .quiz-result-list li { animation: none !important; transition: opacity 0.2s ease !important; opacity: 1 !important; transform: none !important; filter: none !important; }
         }
     </style>
 
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    try{fbq('init', '4635192300140692');fbq('track', 'PageView');fbq('trackCustom', 'Front');}catch(e){/* non-blocking */}
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"/></noscript>
+  
     
     </head>
 <body class="lock">
 
-    <!-- ==========================================
-         OVERLAY DA ANIMAÇÃO INTRODUTÓRIA
-         ========================================== -->
+    <div class="quiz-overlay" id="quizOverlay">
+        <div class="quiz-top">
+            <button class="quiz-back" id="quizBack" data-hidden="true" aria-label="Voltar para a etapa anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+        </div>
+        <div class="quiz-body" id="quizBody"></div>
+    </div>
+
     <div id="intro-overlay">
         <div class="grid-bg-intro"></div>
 
@@ -548,7 +631,6 @@
             <span class="hud-pct" id="hudPct">00%</span>
 
             <svg id="suit-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
-                <!-- Barras do H (Ocultas inicialmente e nascem do centro) -->
                 <path class="draw" id="hBarL" d="M160,45 L160,310"/>
                 <path class="draw" id="hBarR" d="M240,45 L240,310"/>
                 <path class="draw" id="crossbar" d="M160,178 L240,178"/>
@@ -563,12 +645,13 @@
         <button class="skip-btn" id="skipBtn">Pular ›</button>
     </div>
 
-    <!-- ==========================================
-         CONTEÚDO PRINCIPAL DA PÁGINA
-         ========================================== -->
     <div id="main-content">
         <div class="top-bar">
-            <div class="pulse-dot"></div> ATENÇÃO: Vagas com desconto liberadas
+            <div class="top-bar-row">
+                <div class="pulse-dot"></div>
+                Vagas com desconto expiram em <strong id="tb-timer">00:27:43</strong>
+            </div>
+            <div class="top-bar-sub" id="tb-exact"></div>
         </div>
 
         <div class="ambient-bg"><div class="ambient-glow"></div></div>
@@ -586,7 +669,7 @@
                     <span class="white">Código</span>
                     <span class="red">da Atração</span>
                 </h1>
-                <p class="subheadline">A anatomia silenciosa do desejo. Decodifique os sinais que elas tentam esconder, assuma o controle da dinâmica e torne-se a única opção viável.</p>
+                <p class="subheadline">Chega de mandar mensagem e ficar esperando a resposta que não vem. Aqui você aprende a ler o que ela realmente está sinalizando, conduzir a conversa sem parecer carente e virar a opção que ela escolhe — não a que ela deixa esperando.</p>
                 
                 <a href="#oferta" class="btn">
                     Desbloquear Acesso
@@ -596,30 +679,25 @@
 
             <div class="section-divider"></div>
 
-            <!-- ==========================================
-                 SEÇÃO DE IDENTIFICAÇÃO (nova)
-                 Objetivo: fazer o visitante se reconhecer
-                 rapidamente nos problemas listados.
-                 ========================================== -->
             <section class="identify scroll-reveal">
                 <h2 class="section-title" style="font-size: 32px;">Isso já <br><span>aconteceu com você?</span></h2>
-                <p class="identify-intro">Leia os pontos abaixo com calma. Se você se reconheceu em pelo menos dois, o problema não é você — é a falta de método.</p>
+                <p class="identify-intro">Leia com calma. Se você bateu com pelo menos dois desses pontos, o problema não é você — é que ninguém nunca te ensinou o método certo.</p>
                 <ul class="audience-list" style="margin-top:24px;">
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você manda mensagem, ela demora horas para responder — ou simplesmente some sem explicação.
+                        Você manda um "oi" de manhã, ela só vê à noite e responde "kkk oi" — e você fica sem saber se ela sumiu ou só tá enrolando.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você sente que está sempre puxando o assunto sozinho, sem retorno na mesma intensidade.
+                        Você é sempre quem puxa assunto. Ela responde educada, mas nunca pergunta nada de volta.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você já foi chamado de "amigo" quando a intenção sempre foi outra.
+                        Ela já te chamou de "amigo" bem na sua cara, e você só sorriu porque não sabia o que dizer.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você trava na hora certa e vê a oportunidade escapar bem na sua frente.
+                        A abertura apareceu na sua frente e você travou. Ela seguiu em frente, e você ficou remoendo por dias o que devia ter falado.
                     </li>
                 </ul>
             </section>
@@ -631,15 +709,15 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <h4>Fase 1: Desconstrução</h4>
-                        <p>Você elimina instantaneamente a necessidade de validação. Sua linguagem corporal passa a comunicar alto valor antes mesmo da primeira palavra.</p>
+                        <p>Você para de precisar da aprovação dela pra se sentir bem. Isso muda sua postura, seu tom de voz, até o jeito que você entra numa sala — antes de abrir a boca.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 2: Calibração</h4>
-                        <p>O subtexto se torna claro. Você aprende a ler microexpressões e descobre exatamente quando recuar para gerar falta, e quando avançar com precisão cirúrgica.</p>
+                        <p>Você começa a notar o que ela não fala. Um olhar mais longo, uma resposta mais rápida, um "kk" a mais — e sabe na hora se é hora de puxar ou de dar um passo atrás.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 3: Magnetismo</h4>
-                        <p>O esforço desaparece. A criação de tensão se torna instintiva, gerando conversas profundas e uma química impossível de ser ignorada.</p>
+                        <p>Deixa de ser trabalho. Vira automático — a conversa flui, ela ri de verdade, e a tensão aparece sozinha, sem você forçar nada.</p>
                     </div>
                 </div>
             </section>
@@ -663,6 +741,16 @@
                     <li>Construa uma presença masculina polarizadora, autêntica e impossível de ler de primeira.</li>
                     <li>Corte investimentos de tempo em interações sem futuro e foque naquelas que já estão ganhas.</li>
                 </ul>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mid-cta scroll-reveal">
+                <p>Agora você já entende a engenharia por trás do desejo. <strong>A dúvida não é se o método funciona — é se você vai aplicá-lo hoje ou vai continuar refém da sorte.</strong></p>
+                <a href="#oferta" class="btn">
+                    Quero Aplicar o Método
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
             </section>
 
             <div class="section-divider"></div>
@@ -756,20 +844,6 @@
 
             <div class="section-divider"></div>
 
-            <!-- ==========================================
-                 CARROSSEL DE PRINTS / RESULTADOS REAIS
-                 As 5 imagens abaixo devem estar na MESMA PASTA
-                 do arquivo .html para carregar corretamente:
-                 0bc23f3c-ab00-4405-9967-5be27902ab80.jpg  (1080x1482)
-                 2ee73882-2526-46b4-aa9a-134ad42ed243.jpg  (1080x1277)
-                 8d3cb202-2b6a-427f-b864-fe0ebd9ed04a.jpg  (1080x912)
-                 3dbe9cad-b376-4e57-8e28-5803a6aed347.jpg  (1080x940)
-                 d6e8a05b-3f29-4c4a-8f41-826e21253952.jpg  (1069x1600)
-                 As proporções variam entre si; o carrossel usa
-                 object-fit: contain para exibir cada print por
-                 inteiro, sem cortar conteúdo.
-                 ========================================== -->
-
             <section class="members-preview scroll-reveal">
                 <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
                 <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, direto e disponível para consumir no seu ritmo, de qualquer dispositivo.</p>
@@ -820,18 +894,23 @@
             <div class="section-divider"></div>
 
             <!-- ==========================================
-                 ÁREA DE MEMBROS (IMAGEM ÚNICA)
-                 Imagem: 79245d01-36e7-4931-adc8-ee1f09df994d.jpg
-                 deve estar na MESMA PASTA do arquivo .html
-                 ========================================== -->
-            
-
-            <!-- ==========================================
-                 COMENTÁRIOS / PROVA SOCIAL (Ponto Estratégico)
+                 COMENTÁRIOS / PROVA SOCIAL (com números)
                  ========================================== -->
             <section class="social-proof scroll-reveal">
                 <span class="eyebrow">Acesso Liberado • Confidencial</span>
                 <h2 class="section-title" style="font-size: 30px;">O que dizem os <br><span>Iniciados</span></h2>
+
+                <!-- NOVO: prova social quantitativa -->
+                <div class="trust-stats">
+                    <div class="trust-stat">
+                        <span class="trust-num">+300</span>
+                        <span class="trust-label">Homens já aplicaram o método</span>
+                    </div>
+                    <div class="trust-stat">
+                        <span class="trust-num">4.8 <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg></span>
+                        <span class="trust-label">Média de +200 avaliações</span>
+                    </div>
+                </div>
                 
                 <div class="testimonials-grid">
                     
@@ -989,15 +1068,9 @@
 
                 </div>
             </section>
-            <!-- ========================================== -->
 
             <div class="section-divider"></div>
 
-            <!-- ==========================================
-                 CTA INTERMEDIÁRIO (novo)
-                 Objetivo: capturar quem já decidiu comprar
-                 antes de chegar à seção final de oferta.
-                 ========================================== -->
             <section class="mid-cta scroll-reveal">
                 <p>Você já viu prints reais, a área de membros e o que outros alunos disseram. <strong>As vagas com desconto são limitadas e não voltam ao preço promocional.</strong></p>
                 <a href="#oferta" class="btn">
@@ -1015,12 +1088,6 @@
 
             <div class="section-divider"></div>
 
-            <!-- ==========================================
-                 PERCEPÇÃO DE VALOR (nova)
-                 Objetivo: mostrar o valor individual de cada
-                 módulo antes de revelar o preço final, para
-                 reforçar a sensação de economia.
-                 ========================================== -->
             <section class="value-perception scroll-reveal">
                 <h2 class="section-title" style="font-size: 30px;">Tudo isso, <br><span>por uma fração do valor</span></h2>
                 <div class="card" style="padding: 32px 24px;">
@@ -1060,12 +1127,28 @@
                         <span style="background:rgba(193,18,31,0.12); color:var(--red-main); font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:20px; border:1px solid rgba(193,18,31,0.3);">-69% OFF</span>
                     </div>
                     <span class="price-new">R$ 14,70</span>
-                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista • menos de R$ 0,50 por dia no primeiro mês</span>
+                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x de R$4,90 sem juros no cartão</span>
                 </div>
 
                 <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
                     Confirmar Minha Vaga
                 </a>
+
+                <!-- NOVO: selos de segurança perto do CTA final -->
+                <div class="security-badges">
+                    <div class="security-item">
+                        <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M7 10V7a5 5 0 0 1 10 0v3"></path></svg>
+                        Compra 100% Segura
+                    </div>
+                    <div class="security-item">
+                        <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" stroke-linejoin="round"></path></svg>
+                        Pagamento via Pix
+                    </div>
+                    <div class="security-item">
+                        <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><line x1="2.5" y1="9.5" x2="21.5" y2="9.5"></line></svg>
+                        Cartão em até 3x
+                    </div>
+                </div>
 
                 <div class="timer-wrapper">
                     <div class="timer-label">Acesso prioritário expira em:</div>
@@ -1074,6 +1157,7 @@
                         <div class="timer-box" id="t-minutes">27</div><span class="timer-sep">:</span>
                         <div class="timer-box" id="t-seconds">43</div>
                     </div>
+                    <div class="timer-exact" id="timer-exact"></div>
                 </div>
 
                 <div class="guarantee">
@@ -1093,6 +1177,10 @@
                 <div class="faq-item">
                     <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
                     <div class="faq-answer"><p>Absolutamente. Após a confirmação do pagamento via Pix ou Cartão, suas credenciais de acesso são enviadas automaticamente para o seu e-mail.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Posso parcelar a compra? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer"><p>Sim. É um pagamento único (não é assinatura) e pode ser feito à vista no Pix ou parcelado em até 4x sem juros no cartão de crédito.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
@@ -1120,10 +1208,7 @@
     </div>
 
     <script>
-        /* =========================================
-           LÓGICA DA ANIMAÇÃO DE INTRODUÇÃO
-           ========================================= */
-        (function(){
+        function runIntroAnimation(){
             var timers = [];
             function schedule(fn, t){ timers.push(setTimeout(fn, t)); }
 
@@ -1155,25 +1240,21 @@
             }
             function stopPct(){ if(pctInterval) clearInterval(pctInterval); hudPct.textContent='100%'; }
 
-            // Letra H é desenhada do centro do palco
             function drawH(){
                 trigger(hBarL); trigger(hBarR);
                 schedule(function(){ trigger(crossbar); }, 400);
             }
 
-            // Separação das barras
             function splitH(){
                 hBarL.classList.add('split'); hBarR.classList.add('split');
                 crossbar.classList.add('hide');
             }
 
-            // Exibição do texto
             function showText(){
                 revealText.classList.add('show');
                 schedule(function(){ revealRule.classList.add('show'); }, 150);
             }
 
-            // Transição para a página de vendas
             function fadeOutOverlay(){
                 overlay.classList.add('fade-out');
                 mainContent.classList.add('visible');
@@ -1188,69 +1269,598 @@
             }
             skipBtn.addEventListener('click', skip);
 
-            // TIMELINE DA ANIMAÇÃO (simplificada: apenas formação da letra H)
-            schedule(function(){ startPct(1400); }, 0);
-            schedule(function(){ skipBtn.classList.add('show'); }, 700);
+            schedule(function(){ startPct(750); }, 0);
+            schedule(function(){ skipBtn.classList.add('show'); }, 350);
 
-            schedule(function(){ drawH(); }, 300);
-            schedule(function(){ stopPct(); }, 1400);
-            schedule(function(){ splitH(); }, 1700);
-            schedule(function(){ showText(); }, 2000);
-            schedule(function(){ fadeOutOverlay(); }, 3800);
-        })();
+            schedule(function(){ drawH(); }, 150);
+            schedule(function(){ stopPct(); }, 750);
+            schedule(function(){ splitH(); }, 850);
+            schedule(function(){ showText(); }, 1000);
+            schedule(function(){ fadeOutOverlay(); }, 2100);
+        }
 
         /* =========================================
-           LÓGICA DA PÁGINA (TIMER, SCROLL, FAQ)
+           QUIZ / DIAGNÓSTICO — FUNIL DE ENTRADA
            ========================================= */
+        var QUIZ_STORAGE_KEY = 'hdp_quiz_completed_v1';
+
+        /* Ícones (paths internos de svg viewBox 0 0 24 24) usados para reforçar
+           visualmente cada pergunta, cada card informativo e cada perfil de
+           resultado do quiz. */
+        var quizIcons = {
+            chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>',
+            pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>',
+            clock: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path>',
+            alert: '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>',
+            calendar: '<rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
+            spark: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>',
+            eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>',
+            target: '<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle>',
+            bulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>',
+            layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>',
+            steps: '<path d="M9 3H5a2 2 0 0 0-2 2v4m0 6v4a2 2 0 0 0 2 2h4m6 0h4a2 2 0 0 0 2-2v-4m0-6V5a2 2 0 0 0-2-2h-4"></path><circle cx="12" cy="12" r="2"></circle>',
+            gauge: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>',
+            smile: '<circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line>',
+            people: '<path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>'
+        };
+
+        var quizQuestions = [
+            { q: "Como estão indo suas conversas no WhatsApp/Instagram com garotas que você tem interesse?",
+              icon: 'chat',
+              opts: [
+                {t:"Eu puxo quase toda conversa e as respostas demoram ou vêm secas", p:"ansioso"},
+                {t:"Converso bem, mas acabo tratando ela mais como amiga do que como alguém que eu quero conquistar", p:"nice"},
+                {t:"A conversa flui numa boa, só que ela me trata como 'aquele amigo legal'", p:"amigo"},
+                {t:"Vai bem no geral, mas eu travo na hora de dar o próximo passo", p:"quase"}
+              ]
+            },
+            { q: "Quando surge uma oportunidade na rua, faculdade ou balada, o que geralmente acontece?",
+              icon: 'pin',
+              opts: [
+                {t:"Eu travo e deixo a oportunidade passar", p:"ansioso"},
+                {t:"Puxo assunto numa boa, mas fico sem saber se estou 'demonstrando interesse demais'", p:"nice"},
+                {t:"Consigo conversar tranquilo, só que sempre vira 'papo de amigo'", p:"amigo"},
+                {t:"Chamo pra sair, mas não sei calibrar bem o passo seguinte", p:"quase"}
+              ]
+            },
+            { q: "Quando ela demora pra responder uma mensagem, qual é a sua reação mais comum?",
+              icon: 'clock',
+              opts: [
+                {t:"Fico remoendo se fiz ou disse algo errado", p:"ansioso"},
+                {t:"Mando outra mensagem tentando 'reanimar' a conversa", p:"nice"},
+                {t:"Não muda muito, porque no fundo sei que não sou prioridade pra ela", p:"amigo"},
+                {t:"Espero, mas fico em dúvida se puxo de novo ou deixo quieto", p:"quase"}
+              ]
+            },
+            { q: "O que mais se parece com o que costuma dar errado nas suas interações?",
+              icon: 'alert',
+              opts: [
+                {t:"Tenho medo de parecer chato e acabo sumindo da conversa", p:"ansioso"},
+                {t:"Concordo com tudo que ela fala só pra agradar", p:"nice"},
+                {t:"Ela me pede conselho sobre outros caras", p:"amigo"},
+                {t:"Sei criar conexão, mas não sei transformar isso em algo a mais", p:"quase"}
+              ]
+            },
+            { q: "Como está a sua frequência de encontros reais nos últimos meses?",
+              icon: 'calendar',
+              opts: [
+                {t:"Faz tempo que não saio com alguém que eu realmente queira", p:"ansioso"},
+                {t:"Saio bastante como amigo, raramente como algo além disso", p:"nice"},
+                {t:"Sempre acabo ouvindo 'você é tipo um irmão pra mim'", p:"amigo"},
+                {t:"Saio de vez em quando, mas sinto que podia estar indo bem melhor", p:"quase"}
+              ]
+            },
+            { q: "O que você sente um segundo antes de puxar assunto com alguém que te interessa?",
+              icon: 'spark',
+              opts: [
+                {t:"Ansiedade e medo de ser ignorado", p:"ansioso"},
+                {t:"Vontade de agradar e não desagradar de jeito nenhum", p:"nice"},
+                {t:"Tranquilidade, mas já sei que não desperto 'aquele' tipo de interesse", p:"amigo"},
+                {t:"Confiança — só falta saber conduzir o momento certo", p:"quase"}
+              ]
+            },
+            { q: "Qual desses medos mais pesa pra você hoje?",
+              icon: 'eye',
+              opts: [
+                {t:"Ficar sozinho e não saber nem por onde começar", p:"ansioso"},
+                {t:"Ser visto como carente ou insistente", p:"nice"},
+                {t:"Continuar sendo 'só amigo' pra sempre", p:"amigo"},
+                {t:"Deixar oportunidades boas escaparem por falta de método", p:"quase"}
+              ]
+            },
+            { q: "Se pudesse mudar uma coisa agora, qual seria?",
+              icon: 'target',
+              opts: [
+                {t:"Ter mais confiança pra puxar e manter uma conversa", p:"ansioso"},
+                {t:"Aprender a gerar tensão e desejo, não só simpatia", p:"nice"},
+                {t:"Deixar de ser 'só amigo' e virar uma opção real", p:"amigo"},
+                {t:"Ter um método claro pra aplicar, sem depender do achismo", p:"quase"}
+              ]
+            }
+        ];
+
+        var quizInfos = [
+            { title: "Você sabia?", icon: 'bulb',
+              text: "A atração raramente nasce de um discurso bem montado. Na maioria das vezes, ela é uma resposta quase automática à forma como alguém se posiciona — antes mesmo da primeira frase ser dita." },
+            { title: "Um padrão que se repete", icon: 'layers',
+              text: "A maioria dos homens tenta resolver isso na base da lógica: mais mensagens, mais esforço, mais disponibilidade. O problema é que desejo não se constrói com insistência — se constrói com direção." },
+            { title: "A transformação acontece em fases", icon: 'steps',
+              text: "Postura interna, depois leitura de sinais, depois tensão. Pular etapas é exatamente o que trava a maioria dos homens no mesmo padrão, mês após mês." },
+            { title: "Antes do seu resultado...", icon: 'gauge',
+              text: "As respostas que você acabou de dar já mostram um padrão bem específico. Estamos prontos para calcular o seu diagnóstico completo." }
+        ];
+
+        var quizProfiles = {
+            ansioso: {
+                name: "O Ansioso Digital",
+                icon: 'alert',
+                score: 29,
+                text: "Suas respostas mostram um padrão de ansiedade na comunicação — você segue no controle dela, e cada silêncio pesa mais do que devia. Isso faz seu valor emocional cair a cada mensagem sem resposta.",
+                points: [
+                    "Dependência do reconhecimento dela pra se sentir seguro",
+                    "Excesso de mensagens sem retorno proporcional",
+                    "Dificuldade de manter o próprio ritmo dentro da conversa"
+                ]
+            },
+            nice: {
+                name: "O Nice Guy Sem Tensão",
+                icon: 'smile',
+                score: 41,
+                text: "Você constrói simpatia rápido, mas raramente gera desejo. Concordar demais e evitar qualquer atrito te deixa confortável de se conversar — e fácil de esquecer.",
+                points: [
+                    "Falta de polaridade nas conversas",
+                    "Medo de discordar ou criar tensão saudável",
+                    "Presença agradável, mas pouco magnética"
+                ]
+            },
+            amigo: {
+                name: "Estagnado na Zona de Amizade",
+                icon: 'people',
+                score: 53,
+                text: "Você já tem conexão real — o problema é que ela nunca te viu como opção romântica desde o início. Isso não se resolve com mais tempo, se resolve com reposicionamento.",
+                points: [
+                    "Entrada errada na relação desde os primeiros contatos",
+                    "Ausência de sinais claros de interesse romântico",
+                    "Tempo investido em interações que já esfriaram"
+                ]
+            },
+            quase: {
+                name: "Quase Lá — Falta Consistência",
+                icon: 'target',
+                score: 68,
+                text: "Sua base já é boa. O que falta não é personalidade, é direção: saber exatamente quando escalar, quando recuar e como não travar no momento decisivo.",
+                points: [
+                    "Falta de leitura precisa do momento certo de agir",
+                    "Inconsistência entre boas conversas e resultados reais",
+                    "Ausência de um método replicável — depende da sorte do dia"
+                ]
+            }
+        };
+
+        function initQuiz(){
+            var overlay = document.getElementById('quizOverlay');
+            var body = document.getElementById('quizBody');
+            var backBtn = document.getElementById('quizBack');
+            var progressFill = document.getElementById('quizProgressFill');
+
+            var seq = [{type:'cover'}];
+            var order = [0,1,'i0',2,3,'i1',4,5,'i2',6,7,'i3'];
+            order.forEach(function(o){
+                if (typeof o === 'number') seq.push({type:'q', idx:o});
+                else seq.push({type:'info', idx:parseInt(o.slice(1),10)});
+            });
+            seq.push({type:'loading'});
+            seq.push({type:'result'});
+
+            var countedTotal = 12;
+            var answers = new Array(quizQuestions.length).fill(null);
+            var stepIndex = 0;
+
+            function countedPosition(idx){
+                var c = 0;
+                for (var i=1; i<=idx; i++){
+                    if (seq[i].type==='q' || seq[i].type==='info') c++;
+                }
+                return c;
+            }
+
+            function updateChrome(){
+                var step = seq[stepIndex];
+                if (step.type==='cover' || step.type==='loading' || step.type==='result'){
+                    backBtn.setAttribute('data-hidden','true');
+                } else {
+                    backBtn.setAttribute('data-hidden', stepIndex<=1 ? 'true':'false');
+                }
+                if (step.type==='q' || step.type==='info'){
+                    var pos = countedPosition(stepIndex);
+                    progressFill.style.width = Math.round((pos/countedTotal)*100)+'%';
+                } else if (step.type==='cover'){
+                    progressFill.style.width = '0%';
+                } else {
+                    progressFill.style.width = '100%';
+                }
+            }
+
+            function computeProfile(){
+                var tally = {ansioso:0, nice:0, amigo:0, quase:0};
+                answers.forEach(function(p){ if(p) tally[p]++; });
+                var priority = ['ansioso','nice','amigo','quase'];
+                var best = priority[0];
+                priority.forEach(function(k){ if (tally[k] > tally[best]) best = k; });
+                return best;
+            }
+
+            function renderCover(){
+                return '' +
+                    '<span class="quiz-eyebrow">Diagnóstico Rápido · 2 minutos</span>' +
+                    '<h2 class="quiz-title">Descubra por que suas <span>conversas não evoluem</span></h2>' +
+                    '<p class="quiz-sub">Responda 8 perguntas rápidas. No final, você recebe um diagnóstico personalizado com os pontos exatos que estão travando você agora.</p>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizStartBtn" type="button">Iniciar Diagnóstico</button></div>';
+            }
+
+            function renderQuestion(idx){
+                var q = quizQuestions[idx];
+                var optsHtml = q.opts.map(function(o, i){
+                    var sel = answers[idx]===o.p ? ' selected':'';
+                    var delay = (0.08 + i*0.07).toFixed(2);
+                    return '<button class="quiz-opt'+sel+'" data-p="'+o.p+'" type="button" style="animation-delay:'+delay+'s"><span class="quiz-opt-dot"></span><span>'+o.t+'</span></button>';
+                }).join('');
+                var dotsHtml = quizQuestions.map(function(_, i){
+                    var cls = 'qd';
+                    if (i === idx) cls += ' current';
+                    else if (answers[i]) cls += ' done';
+                    return '<span class="'+cls+'"></span>';
+                }).join('');
+                return '' +
+                    '<div class="quiz-dots-track">'+dotsHtml+'</div>' +
+                    '<div class="quiz-q-icon"><span class="quiz-q-icon-badge"><svg viewBox="0 0 24 24">'+quizIcons[q.icon]+'</svg></span></div>' +
+                    '<span class="quiz-eyebrow" style="text-align:left;">Pergunta '+(idx+1)+' de '+quizQuestions.length+'</span>' +
+                    '<h2 class="quiz-title left">'+q.q+'</h2>' +
+                    '<div class="quiz-options">'+optsHtml+'</div>';
+            }
+
+            function renderInfo(idx){
+                var info = quizInfos[idx];
+                return '' +
+                    '<div class="quiz-info-icon"><svg viewBox="0 0 24 24">'+quizIcons[info.icon]+'</svg></div>' +
+                    '<h2 class="quiz-title">'+info.title+'</h2>' +
+                    '<div class="quiz-info-box">'+info.text+'</div>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizContinueBtn" type="button">Continuar</button></div>';
+            }
+
+            function renderLoading(){
+                return '<div class="quiz-loading">' +
+                    '<div class="quiz-loading-ring-wrap">' +
+                        '<div class="quiz-loading-ring"></div>' +
+                        '<div class="quiz-loading-ring ring-2"></div>' +
+                        '<div class="quiz-loading-core"></div>' +
+                    '</div>' +
+                    '<div class="quiz-loading-pct" id="quizLoadPct">0%</div>' +
+                    '<div class="quiz-loading-status" id="quizLoadStatus">Cruzando suas respostas...</div>' +
+                    '</div>';
+            }
+
+            function renderResult(){
+                var key = computeProfile();
+                var prof = quizProfiles[key];
+                var pointsHtml = prof.points.map(function(p, i){
+                    var delay = (0.15 + i*0.1).toFixed(2);
+                    return '<li style="animation-delay:'+delay+'s"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>'+p+'</span></li>';
+                }).join('');
+                return '' +
+                    '<span class="quiz-eyebrow">Diagnóstico Concluído</span>' +
+                    '<div class="quiz-result-badge"><span class="quiz-result-badge-ring"><svg viewBox="0 0 24 24">'+quizIcons[prof.icon]+'</svg></span></div>' +
+                    '<h2 class="quiz-title">Perfil identificado:<br><span>'+prof.name+'</span></h2>' +
+                    '<p class="quiz-sub">'+prof.text+'</p>' +
+                    '<div class="quiz-result-score">' +
+                        '<span class="qrs-label">Índice de Presença Masculina</span>' +
+                        '<div class="qrs-bar-track"><div class="qrs-bar-fill" id="qrsBarFill" style="width:0%"></div></div>' +
+                        '<span class="qrs-bar-pct" id="qrsBarPct">0%</span>' +
+                    '</div>' +
+                    '<ul class="quiz-result-list">'+pointsHtml+'</ul>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizCtaBtn" type="button">Ver o Método Que Resolve Isso</button></div>';
+            }
+
+            function animateCount(el, target){
+                var t0 = performance.now(); var dur = 900;
+                function step(now){
+                    var p = Math.min(1, (now-t0)/dur);
+                    el.textContent = Math.round(p*target)+'%';
+                    if (p<1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            function runLoading(){
+                var statuses = ["Cruzando suas respostas...", "Identificando pontos de bloqueio...", "Calculando seu Índice de Presença Masculina...", "Montando seu diagnóstico..."];
+                var t0 = performance.now(); var dur = 2600; var si = 0;
+                var statusTimer = setInterval(function(){
+                    si = (si+1) % statuses.length;
+                    var statusEl = document.getElementById('quizLoadStatus');
+                    if (statusEl){
+                        statusEl.classList.add('swap');
+                        setTimeout(function(){
+                            statusEl.textContent = statuses[si];
+                            statusEl.classList.remove('swap');
+                        }, 180);
+                    }
+                }, 700);
+                function tick(now){
+                    var p = Math.min(1, (now-t0)/dur);
+                    var pctEl = document.getElementById('quizLoadPct');
+                    if (pctEl) pctEl.textContent = Math.round(p*100)+'%';
+                    if (p<1) requestAnimationFrame(tick);
+                    else { clearInterval(statusTimer); setTimeout(goNext, 300); }
+                }
+                requestAnimationFrame(tick);
+            }
+
+            function bindStep(step){
+                if (step.type === 'cover'){
+                    var startBtn = document.getElementById('quizStartBtn');
+                    if (startBtn) startBtn.addEventListener('click', goNext);
+                } else if (step.type === 'q'){
+                    var opts = body.querySelectorAll('.quiz-opt');
+                    opts.forEach(function(btn){
+                        btn.addEventListener('click', function(){
+                            if (btn.classList.contains('selected')) return;
+                            opts.forEach(function(o){ o.classList.remove('selected'); });
+                            btn.classList.add('selected');
+                            answers[step.idx] = btn.getAttribute('data-p');
+                            setTimeout(goNext, 320);
+                        });
+                    });
+                } else if (step.type === 'info'){
+                    var contBtn = document.getElementById('quizContinueBtn');
+                    if (contBtn) contBtn.addEventListener('click', goNext);
+                } else if (step.type === 'result'){
+                    var key = computeProfile();
+                    var prof = quizProfiles[key];
+                    setTimeout(function(){
+                        var fill = document.getElementById('qrsBarFill');
+                        var pct = document.getElementById('qrsBarPct');
+                        if (fill) fill.style.width = prof.score+'%';
+                        if (pct) animateCount(pct, prof.score);
+                    }, 300);
+                    var ctaBtn = document.getElementById('quizCtaBtn');
+                    if (ctaBtn) ctaBtn.addEventListener('click', finishQuiz);
+                }
+            }
+
+            var STEP_TRANSITION_MS = 220;
+
+            function doRenderStep(){
+                var step = seq[stepIndex];
+                var html = '';
+                if (step.type === 'cover') html = renderCover();
+                else if (step.type === 'q') html = renderQuestion(step.idx);
+                else if (step.type === 'info') html = renderInfo(step.idx);
+                else if (step.type === 'loading') html = renderLoading();
+                else if (step.type === 'result') html = renderResult();
+
+                body.innerHTML = '<div class="quiz-step" id="quizStepInner">'+html+'</div>';
+                var el = document.getElementById('quizStepInner');
+                requestAnimationFrame(function(){
+                    requestAnimationFrame(function(){ el.classList.add('in'); });
+                });
+                bindStep(step);
+                updateChrome();
+            }
+
+            // Faz um crossfade suave entre a etapa atual e a próxima, em vez
+            // de trocar o conteúdo de forma seca e instantânea.
+            function renderStep(){
+                var currentEl = document.getElementById('quizStepInner');
+                if (currentEl){
+                    currentEl.classList.remove('in');
+                    currentEl.classList.add('out');
+                    setTimeout(doRenderStep, STEP_TRANSITION_MS);
+                } else {
+                    doRenderStep();
+                }
+            }
+
+            function goNext(){
+                if (stepIndex < seq.length-1){
+                    stepIndex++;
+                    renderStep();
+                    if (seq[stepIndex].type==='loading') setTimeout(runLoading, STEP_TRANSITION_MS + 60);
+                }
+            }
+            function goPrev(){
+                if (stepIndex > 0 && seq[stepIndex].type!=='loading' && seq[stepIndex].type!=='result'){
+                    stepIndex--;
+                    renderStep();
+                }
+            }
+            backBtn.addEventListener('click', goPrev);
+
+            function finishQuiz(){
+                try { localStorage.setItem(QUIZ_STORAGE_KEY, '1'); } catch(e){}
+                overlay.classList.add('quiz-hide');
+                var introOverlay = document.getElementById('intro-overlay');
+                introOverlay.style.display = 'flex';
+                setTimeout(function(){
+                    overlay.style.display = 'none';
+                    runIntroAnimation();
+                }, 400);
+            }
+
+            renderStep();
+        }
+
+        (function(){
+            try {
+                if (localStorage.getItem(QUIZ_STORAGE_KEY)) {
+                    document.getElementById('quizOverlay').style.display = 'none';
+                    runIntroAnimation();
+                } else {
+                    document.getElementById('intro-overlay').style.display = 'none';
+                    initQuiz();
+                }
+            } catch(e){
+                document.getElementById('intro-overlay').style.display = 'none';
+                initQuiz();
+            }
+        })();
+
+        /**
+         * Timer de oferta.
+         *
+         * Regras:
+         * - O horário de encerramento é sempre em :00 ou :30.
+         * - Se faltarem menos de 11 minutos para o próximo :00/:30,
+         *   pula para o horário seguinte (evita prazos curtos demais).
+         * - O horário de encerramento é calculado UMA ÚNICA VEZ por
+         *   dispositivo (na primeira visita) e gravado no localStorage.
+         *   Em visitas seguintes o valor salvo é reutilizado e NÃO é
+         *   recalculado — o prazo não se estica nem se renova sozinho
+         *   naquele aparelho.
+         * - Quando o tempo chega a zero, o contador para em 00:00:00
+         *   e permanece assim (não reinicia automaticamente).
+         * - O cálculo do tempo restante usa Date.now() a cada tick,
+         *   em vez de decrementar um contador, para não perder
+         *   precisão quando a aba fica em segundo plano.
+         */
         function initCountdown() {
-            const hBox = document.getElementById('t-hours'), mBox = document.getElementById('t-minutes'), sBox = document.getElementById('t-seconds');
-            const storageKey = 'codigo_atracao_timer_pro';
-            const duration = 27 * 60 * 1000 + 43 * 1000;
+            const hBox = document.getElementById('t-hours');
+            const mBox = document.getElementById('t-minutes');
+            const sBox = document.getElementById('t-seconds');
+            const exactBox = document.getElementById('timer-exact');
+            const tbTimerBox = document.getElementById('tb-timer');
+            const tbExactBox = document.getElementById('tb-exact');
+            const storageKey = 'codigo_atracao_expiration_v2';
+            const MIN_MS = 11 * 60 * 1000;
+
+            function getNextHalfHour(from) {
+                const d = new Date(from.getTime());
+                d.setSeconds(0, 0);
+                if (d.getMinutes() < 30) {
+                    d.setMinutes(30);
+                } else {
+                    d.setMinutes(0);
+                    d.setHours(d.getHours() + 1);
+                }
+                return d;
+            }
+
+            function computeTarget() {
+                const now = new Date();
+                let target = getNextHalfHour(now);
+                if (target.getTime() - now.getTime() < MIN_MS) {
+                    target = getNextHalfHour(target);
+                }
+                return target.getTime();
+            }
 
             let targetTime = localStorage.getItem(storageKey);
-            if (!targetTime || new Date().getTime() > parseInt(targetTime, 10)) {
-                targetTime = new Date().getTime() + duration;
-                localStorage.setItem(storageKey, targetTime);
-            } else { targetTime = parseInt(targetTime, 10); }
-
-            function updateTimer() {
-                let diff = targetTime - new Date().getTime();
-                if (diff <= 0) {
-                    targetTime = new Date().getTime() + duration;
-                    localStorage.setItem(storageKey, targetTime);
-                    diff = duration;
-                }
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                const format = (num) => String(num).padStart(2, '0');
-
-                if(hBox) hBox.textContent = format(hours);
-                if(mBox) mBox.textContent = format(minutes);
-                if(sBox) sBox.textContent = format(seconds);
+            if (targetTime === null) {
+                targetTime = computeTarget();
+                localStorage.setItem(storageKey, String(targetTime));
+            } else {
+                targetTime = parseInt(targetTime, 10);
             }
-            updateTimer(); setInterval(updateTimer, 1000);
+
+            function renderExactTime() {
+                const target = new Date(targetTime);
+                const now = new Date();
+
+                const pad = (n) => String(n).padStart(2, '0');
+                const timeStr = pad(target.getHours()) + ':' + pad(target.getMinutes());
+                const dateStr = pad(target.getDate()) + '/' + pad(target.getMonth() + 1) + '/' + target.getFullYear();
+
+                const sameDay = target.getDate() === now.getDate() &&
+                                 target.getMonth() === now.getMonth() &&
+                                 target.getFullYear() === now.getFullYear();
+
+                const dayLabel = sameDay ? 'hoje' : 'amanhã';
+                const text = 'Oferta válida até às <strong>' + timeStr + '</strong> de ' + dayLabel + ' (' + dateStr + ')';
+
+                if (exactBox) exactBox.innerHTML = text;
+                if (tbExactBox) tbExactBox.innerHTML = text;
+            }
+
+            renderExactTime();
+
+            function render(diffMs) {
+                if (diffMs < 0) diffMs = 0;
+                const totalSeconds = Math.floor(diffMs / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                const fmt = (num) => String(num).padStart(2, '0');
+                if (hBox) hBox.textContent = fmt(hours);
+                if (mBox) mBox.textContent = fmt(minutes);
+                if (sBox) sBox.textContent = fmt(seconds);
+                if (tbTimerBox) tbTimerBox.textContent = fmt(hours) + ':' + fmt(minutes) + ':' + fmt(seconds);
+            }
+
+            let intervalId = null;
+
+            function tick() {
+                const diff = targetTime - Date.now();
+                render(diff);
+                if (diff <= 0) {
+                    render(0);
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                }
+            }
+
+            tick();
+            intervalId = setInterval(tick, 1000);
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'visible') tick();
+            });
         }
 
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
-            const revealPoint = 50;
             revealElements.forEach(el => {
-                const revealTop = el.getBoundingClientRect().top;
-                if (revealTop < windowHeight - revealPoint) { el.classList.add('active'); }
+                if (el.getBoundingClientRect().top < windowHeight - 50) {
+                    el.classList.add('active');
+                }
             });
         };
 
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+            revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+            window.addEventListener('scroll', revealOnScroll, { passive: true });
+        }
+
         const stickyCta = document.getElementById('stickyCta');
         const offerSection = document.getElementById('oferta');
+
+        let offerInView = false;
+        if ('IntersectionObserver' in window && offerSection) {
+            const offerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { offerInView = entry.isIntersecting; });
+            }, { threshold: 0 });
+            offerObserver.observe(offerSection);
+        }
+
+        let stickyTicking = false;
         const handleStickyVisibility = () => {
-            const offerTop = offerSection.getBoundingClientRect().top;
-            if (window.scrollY > 500 && offerTop > window.innerHeight) {
-                stickyCta.classList.add('visible');
-            } else {
-                stickyCta.classList.remove('visible');
-            }
+            if (stickyTicking) return;
+            stickyTicking = true;
+            requestAnimationFrame(() => {
+                const shouldShow = window.scrollY > 500 && !offerInView;
+                stickyCta.classList.toggle('visible', shouldShow);
+                stickyTicking = false;
+            });
         };
 
         const faqItems = document.querySelectorAll('.faq-item');
@@ -1263,9 +1873,6 @@
             });
         });
 
-        /* =========================================
-           CARROSSEL INFINITO DE PRINTS
-           ========================================= */
         function initProofCarousel() {
             const track = document.getElementById('carouselTrack');
             const dotsWrap = document.getElementById('carouselDots');
@@ -1292,7 +1899,6 @@
                 dots.forEach((d, i) => d.classList.toggle('active', i === index));
             }
 
-            // Carrossel infinito: ao passar da última imagem, retorna suavemente à primeira
             function goTo(i) {
                 index = (i + total) % total;
                 render();
@@ -1304,7 +1910,6 @@
             nextBtn.addEventListener('click', next);
             prevBtn.addEventListener('click', prev);
 
-            // Suporte a swipe (touch) no celular
             let startX = 0, isSwiping = false;
             const viewport = document.getElementById('carouselViewport');
             viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isSwiping = true; }, { passive: true });
@@ -1314,7 +1919,7 @@
                 if (diff > 40) prev();
                 else if (diff < -40) next();
                 isSwiping = false;
-            });
+            }, { passive: true });
 
             function resetAuto() {
                 if (autoTimer) clearInterval(autoTimer);
@@ -1325,7 +1930,7 @@
             resetAuto();
         }
 
-        window.addEventListener('scroll', () => { revealOnScroll(); handleStickyVisibility(); });
+        window.addEventListener('scroll', handleStickyVisibility, { passive: true });
         window.addEventListener('load', () => { initCountdown(); revealOnScroll(); initProofCarousel(); });
     </script>
 </body>
