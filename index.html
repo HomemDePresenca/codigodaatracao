@@ -737,7 +737,12 @@
 
             <section class="story-section scroll-reveal">
                 <h2 class="section-title">A verdade brutal: <br><span>O desejo não se negocia</span></h2>
-                <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Eles usam a lógica. Eles sufocam com mensagens. Demonstram interesse e disponibilidade quando deveriam demonstrar mistério.</p>
+                <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Os erros mais comuns:</p>
+                <ul class="target-list" style="margin-top:0; padding-top:0; border-top:none;">
+                    <li>Usam pura lógica para tentar gerar interesse</li>
+                    <li>Sufocam a conversa com excesso de mensagens</li>
+                    <li>Demonstram interesse e disponibilidade quando deveriam demonstrar mistério</li>
+                </ul>
                 <p>O resultado? Você vira apenas mais um na tela do celular dela, caminhando a passos largos para a zona de amizade.</p>
                 
                 <div class="highlight-box">
@@ -1369,24 +1374,6 @@
                 {t:"Tranquilidade, mas já sei que não desperto 'aquele' tipo de interesse", p:"amigo"},
                 {t:"Confiança — só falta saber conduzir o momento certo", p:"quase"}
               ]
-            },
-            { q: "Qual desses medos mais pesa pra você hoje?",
-              icon: 'eye',
-              opts: [
-                {t:"Ficar sozinho e não saber nem por onde começar", p:"ansioso"},
-                {t:"Ser visto como carente ou insistente", p:"nice"},
-                {t:"Continuar sendo 'só amigo' pra sempre", p:"amigo"},
-                {t:"Deixar oportunidades boas escaparem por falta de método", p:"quase"}
-              ]
-            },
-            { q: "Se pudesse mudar uma coisa agora, qual seria?",
-              icon: 'target',
-              opts: [
-                {t:"Ter mais confiança pra puxar e manter uma conversa", p:"ansioso"},
-                {t:"Aprender a gerar tensão e desejo, não só simpatia", p:"nice"},
-                {t:"Deixar de ser 'só amigo' e virar uma opção real", p:"amigo"},
-                {t:"Ter um método claro pra aplicar, sem depender do achismo", p:"quase"}
-              ]
             }
         ];
 
@@ -1396,9 +1383,7 @@
             { title: "Um padrão que se repete", icon: 'layers',
               text: "A maioria dos homens tenta resolver isso na base da lógica: mais mensagens, mais esforço, mais disponibilidade. O problema é que desejo não se constrói com insistência — se constrói com direção." },
             { title: "A transformação acontece em fases", icon: 'steps',
-              text: "Postura interna, depois leitura de sinais, depois tensão. Pular etapas é exatamente o que trava a maioria dos homens no mesmo padrão, mês após mês." },
-            { title: "Antes do seu resultado...", icon: 'gauge',
-              text: "As respostas que você acabou de dar já mostram um padrão bem específico. Estamos prontos para calcular o seu diagnóstico completo." }
+              text: "Postura interna, depois leitura de sinais, depois tensão. Pular etapas é exatamente o que trava a maioria dos homens no mesmo padrão, mês após mês." }
         ];
 
         var quizProfiles = {
@@ -1455,7 +1440,7 @@
             var progressFill = document.getElementById('quizProgressFill');
 
             var seq = [{type:'cover'}];
-            var order = [0,1,'i0',2,3,'i1',4,5,'i2',6,7,'i3'];
+            var order = [0,1,'i0',2,3,'i1',4,5,'i2'];
             order.forEach(function(o){
                 if (typeof o === 'number') seq.push({type:'q', idx:o});
                 else seq.push({type:'info', idx:parseInt(o.slice(1),10)});
@@ -1463,7 +1448,7 @@
             seq.push({type:'loading'});
             seq.push({type:'result'});
 
-            var countedTotal = 12;
+            var countedTotal = 9;
             var answers = new Array(quizQuestions.length).fill(null);
             var stepIndex = 0;
 
