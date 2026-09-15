@@ -53,172 +53,19 @@
             padding-top: 0;
         }
 
-        /* =========================================
-           ANIMAÇÃO INTRO (REFINADA & MOBILE-FIRST)
-           ========================================= */
-        #intro-overlay {
-            position: fixed; inset: 0; z-index: 99999;
-            background: radial-gradient(circle at 50% 40%, #0a0102 0%, var(--bg-deep) 80%);
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
-        }
-        #intro-overlay.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        .grid-bg-intro {
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(193, 18, 31, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(193, 18, 31, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: gridpan 40s linear infinite;
-        }
-        @keyframes gridpan {
-            from { background-position: 0 0, 0 0; }
-            to { background-position: 400px 0, 0 400px; }
-        }
-
-        .intro-stage {
-            position: relative;
-            width: min(85vw, 380px);
-            aspect-ratio: 400/420;
-            perspective: 1000px;
-        }
-
-        .bracket { position: absolute; width: 20px; height: 20px; border-color: var(--red-dusk); opacity: 0.8; }
-        .bracket.tl { top: -10px; left: -10px; border-top: 1px solid; border-left: 1px solid; }
-        .bracket.tr { top: -10px; right: -10px; border-top: 1px solid; border-right: 1px solid; }
-        .bracket.bl { bottom: -10px; left: -10px; border-bottom: 1px solid; border-left: 1px solid; }
-        .bracket.br { bottom: -10px; right: -10px; border-bottom: 1px solid; border-right: 1px solid; }
-
-        .hud-label, .hud-pct {
-            position: absolute; font-family: monospace; font-size: 10px;
-            letter-spacing: 2px; color: var(--red-main); opacity: 0;
-        }
-        .hud-label { left: -10px; top: -30px; white-space: nowrap; }
-        .hud-label.show { animation: hudflicker 0.6s ease forwards; }
-        .hud-pct { right: -6px; bottom: -28px; font-size: 11px; }
-        .hud-pct.show { opacity: 0.9; }
-
-        @keyframes hudflicker { 0%{opacity:0;} 30%{opacity:1;} 50%{opacity:0.2;} 100%{opacity:0.9;} }
-
-        #suit-svg {
-            width: 100%; height: 100%; display: block; transform-style: preserve-3d;
-            animation: spinIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-        @keyframes spinIn {
-            0% { transform: rotateY(-90deg) scale(0.85); opacity: 0; filter: blur(2px); }
-            100% { transform: rotateY(0deg) scale(1); opacity: 1; filter: blur(0px); }
-        }
-
-        .draw {
-            fill: none; stroke: rgba(255,255,255,0.15); stroke-width: 1.8;
-            stroke-linecap: round; stroke-linejoin: round;
-            transition: stroke-dashoffset 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease, stroke 0.5s ease;
-        }
-        .draw.accent { stroke: var(--red-main); stroke-width: 2.2; }
-
-        #hBarL, #hBarR { transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
-        #hBarL.split { transform: translateX(-90px); }
-        #hBarR.split { transform: translateX(90px); }
-        #crossbar { stroke: var(--red-main); stroke-width: 2.5; transition: opacity 0.5s ease; }
-        #crossbar.hide { opacity: 0; }
-
-        #text-reveal {
-            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; pointer-events: none;
-        }
-        .reveal-text {
-            opacity: 0; transform: scale(0.9);
-            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-            color: var(--white-main); font-family: var(--font-heading);
-            letter-spacing: 3px; font-size: clamp(22px, 6vw, 32px); text-align: center; white-space: nowrap;
-        }
-        .reveal-text.show { opacity: 1; transform: scale(1); }
-        .reveal-text .big-h { color: var(--red-main); font-size: 1.6em; }
-        .reveal-rule {
-            width: 0; height: 1px; background: var(--red-dusk); margin-top: 8px;
-            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-        }
-        .reveal-rule.show { width: 140px; }
-
-        .skip-btn {
-            position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); right: 24px;
-            font-family: monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-            color: var(--white-sec); background: rgba(0,0,0,0.6); border: 1px solid var(--border-subtle);
-            padding: 8px 16px; border-radius: 4px; cursor: pointer; opacity: 0; z-index: 2;
-            transition: opacity 0.8s ease, color 0.3s, border-color 0.3s;
-        }
-        .skip-btn.show { opacity: 0.7; }
-        .skip-btn:active { color: var(--red-main); border-color: var(--red-main); }
-
         /* VINHETA & PROFUNDIDADE */
         body::after {
             content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.95) 100%);
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 100%);
         }
 
-        /* BACKGROUND VIVO MINIMALISTA */
-        .ambient-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3;
-            background: radial-gradient(circle at 50% 10%, #0d0203 0%, var(--bg-deep) 70%);
-        }
-        .ambient-glow {
-            position: absolute; top: -15%; left: 50%; width: 120vw; height: 50vh;
-            background: radial-gradient(ellipse, rgba(193, 18, 31, 0.05) 0%, transparent 70%);
-            pointer-events: none; animation: drift 20s ease-in-out infinite alternate;
-            will-change: transform;
-        }
-
-        @keyframes drift {
-            0% { transform: translate(-50%, 0) scale(1); }
-            100% { transform: translate(-48%, 2%) scale(1.05); }
-        }
-
-        /* PARTÍCULAS GEOMÉTRICAS */
-        .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
-        .particle { position: absolute; color: var(--red-main); opacity: 0; font-family: monospace; font-size: 10px; animation: floatSymbol infinite linear; will-change: transform, opacity; }
-        .p1 { left: 15%; animation-duration: 25s; font-size: 12px; animation-delay: 0s; }
-        .p2 { left: 85%; animation-duration: 30s; font-size: 14px; animation-delay: 4s; }
-        .p3 { left: 45%; animation-duration: 28s; font-size: 10px; animation-delay: 8s; opacity: 0.05;}
-        .p4 { left: 75%; animation-duration: 35s; font-size: 12px; animation-delay: 2s; }
-        .p5 { left: 20%; animation-duration: 32s; font-size: 14px; animation-delay: 12s; }
-        .p6 { left: 60%; animation-duration: 22s; font-size: 10px; animation-delay: 6s; }
-
-        /* Em telas ate 480px (a grande maioria dos celulares em pe),
-           reduzimos de 6 para 3 particulas simultaneas rodando para
-           sempre, sem remover o efeito visual como um todo. */
-        @media (max-width: 480px) {
-            .p4, .p5, .p6 { display: none; }
-        }
-        @media (max-width: 380px) {
-            .p3 { display: none; }
-        }
-
-        /* Respeita quem pediu menos movimento no sistema operacional
-           e, de quebra, alivia bastante o trabalho continuo da GPU
-           em aparelhos mais limitados. Nada de conteudo é alterado,
-           apenas a intensidade das animações decorativas. */
         @media (prefers-reduced-motion: reduce) {
-            .grid-bg-intro, .particle, .ambient-glow, .btn::before, .pulse-dot {
+            .btn::before, .pulse-dot {
                 animation: none !important;
             }
         }
 
-        @keyframes floatSymbol {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.07; }
-            80% { opacity: 0.07; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        .cinematic-grain {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.03; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
         /* LAYOUT GERAL */
-        #main-content { opacity: 0; transition: opacity 0.5s ease; }
-        #main-content.visible { opacity: 1; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative; }
 
         h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1.5px; }
@@ -302,9 +149,6 @@
         .card-insight { font-size: 12px; color: #777; border-top: 1px solid var(--border-subtle); padding-top: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* SCIENCE */
-        .science-box { text-align: center; padding: 50px 24px; background: #060606; border: 1px solid var(--border-subtle); border-radius: 6px; }
-        .science-box p { font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; margin-top: 16px; }
-
         /* CARROSSEL DE PRINTS (RESULTADOS) */
         .proof-carousel { margin-top: 20px; }
         .carousel-viewport {
@@ -330,9 +174,6 @@
         /* ÁREA DE MEMBROS (IMAGEM ÚNICA) */
         .members-preview { margin-top: 20px; text-align: center; }
         .members-frame { margin-top: 28px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a; }
-        .members-frame .browser-bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle); }
-        .browser-bar span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
-        .browser-bar span:nth-child(1) { background: #C1121F; }
         .members-frame img { width: 100%; display: block; }
         .members-placeholder { width: 100%; aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--white-sec); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .members-placeholder svg { width: 36px; height: 36px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
@@ -410,16 +251,15 @@
 
         /* OFFER */
         .offer-box { background: #080808; border: 1px solid var(--red-main); padding: 48px 24px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 6px; }
-        .offer-box::before {
-            content: 'ACESSO RESTRITO LIBERADO'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            background: var(--bg-deep); border: 1px solid var(--red-main); color: var(--red-main); font-size: 10px; font-weight: 600;
-            padding: 4px 16px; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px; white-space: nowrap;
+        .offer-badge {
+            display: inline-block; background: rgba(193,18,31,0.1); border: 1px solid var(--border-highlight);
+            color: var(--red-main); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
         }
         .price-container { margin-bottom: 32px; display: flex; flex-direction: column; gap: 8px; }
         .price-old { font-size: 14px; text-decoration: line-through; color: #666; text-transform: uppercase; letter-spacing: 1px;}
         .price-new { font-size: 56px; color: #fff; font-family: var(--font-heading); line-height: 1; }
 
-        /* NOVO: selos de segurança perto do CTA final */
         .security-badges {
             display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap;
         }
@@ -487,136 +327,6 @@
                 backdrop-filter: blur(2px);
             }
         }
-
-        /* =========================================
-           QUIZ / DIAGNÓSTICO (FUNIL DE ENTRADA)
-           ========================================= */
-        .quiz-overlay {
-            position: fixed; inset: 0; z-index: 999999;
-            background: radial-gradient(circle at 50% 20%, #0a0102 0%, var(--bg-deep) 75%);
-            display: flex; flex-direction: column;
-            opacity: 1; visibility: visible;
-            transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), visibility 0.45s;
-        }
-        .quiz-overlay.quiz-hide { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        .quiz-top {
-            display: flex; align-items: center; gap: 14px; flex-shrink: 0;
-            padding: max(18px, env(safe-area-inset-top)) 20px 14px;
-        }
-        .quiz-back {
-            width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-            background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--white-main); cursor: pointer;
-            transition: opacity 0.25s ease, border-color 0.25s ease;
-        }
-        .quiz-back svg { width: 16px; height: 16px; }
-        .quiz-back[data-hidden="true"] { opacity: 0; pointer-events: none; }
-        .quiz-back:active { border-color: var(--border-highlight); }
-
-        .quiz-progress-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
-        .quiz-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 0.6s cubic-bezier(0.65,0,0.35,1); }
-
-        .quiz-body {
-            flex: 1; display: flex; flex-direction: column; overflow-y: auto;
-            padding: 10px 24px calc(40px + env(safe-area-inset-bottom));
-            -webkit-overflow-scrolling: touch;
-        }
-        .quiz-step {
-            margin: auto auto; width: 100%; max-width: 440px;
-            opacity: 0; transform: translateY(18px) scale(0.985);
-            transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
-            filter: blur(4px);
-            will-change: opacity, transform;
-        }
-        .quiz-step.in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        .quiz-step.out {
-            opacity: 0; transform: translateY(-12px) scale(0.985); filter: blur(3px);
-            transition: opacity 0.28s cubic-bezier(0.4,0,1,1), transform 0.28s cubic-bezier(0.4,0,1,1), filter 0.28s ease;
-        }
-
-        .quiz-eyebrow { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--red-main); margin-bottom: 14px; font-weight: 600; text-align: center; }
-        .quiz-title { font-family: var(--font-heading); font-size: 28px; line-height: 1.08; letter-spacing: 1px; text-align: center; color: #fff; margin-bottom: 14px; }
-        .quiz-title.left { text-align: left; font-size: 22px; }
-        .quiz-title span { color: var(--red-main); }
-        .quiz-sub { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; text-align: center; margin-bottom: 26px; }
-
-        /* Ícone temático de cada pergunta — reforço visual, sem poluir o layout */
-        .quiz-q-icon { display: flex; justify-content: flex-start; margin-bottom: 14px; opacity: 0; transform: scale(0.7) rotate(-8deg); animation: quizIconPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.05s forwards; }
-        .quiz-q-icon.centered { justify-content: center; }
-        .quiz-q-icon-badge {
-            width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
-            background: rgba(193,18,31,0.08); border: 1px solid var(--border-highlight);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .quiz-q-icon-badge svg { width: 22px; height: 22px; stroke: var(--red-main); fill: none; stroke-width: 1.6; }
-        @keyframes quizIconPop { to { opacity: 1; transform: scale(1) rotate(0deg); } }
-
-        .quiz-options { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
-        .quiz-opt {
-            display: flex; align-items: center; gap: 14px; text-align: left; width: 100%;
-            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); border-radius: 8px;
-            padding: 18px 16px; color: #d1d1d1; font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.5;
-            cursor: pointer; transition: border-color 0.3s ease, background 0.3s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
-            opacity: 0; transform: translateY(10px);
-            animation: quizOptIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
-        }
-        @keyframes quizOptIn { to { opacity: 1; transform: translateY(0); } }
-        .quiz-opt-dot { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--red-main); position: relative; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-        .quiz-opt-dot::after { content: ''; position: absolute; inset: 3px; background: var(--red-main); border-radius: 50%; transform: scale(0); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-        .quiz-opt.selected .quiz-opt-dot::after { transform: scale(1); }
-        .quiz-opt.selected .quiz-opt-dot { transform: scale(1.12); }
-        .quiz-opt.selected { border-color: var(--border-highlight); background: rgba(193,18,31,0.06); }
-        .quiz-opt:active { transform: scale(0.98); }
-
-        .quiz-info-icon { display: flex; justify-content: center; margin-bottom: 18px; opacity: 0; transform: scale(0.7); animation: quizIconPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.05s forwards; }
-        .quiz-info-icon svg { width: 34px; height: 34px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
-        .quiz-info-box { background: transparent; border-left: 2px solid var(--red-main); padding: 16px 20px; margin: 6px 0 30px; font-style: italic; color: #d1d1d1; font-size: 14.5px; line-height: 1.6; font-weight: 300; }
-
-        .quiz-cta { display: flex; justify-content: center; margin-top: 6px; }
-
-        /* Barra de progresso mini (bolinhas) — dá noção visual de quantas perguntas faltam */
-        .quiz-dots-track { display: flex; justify-content: center; gap: 6px; margin-bottom: 22px; }
-        .quiz-dots-track .qd { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: background 0.3s ease, transform 0.3s ease; }
-        .quiz-dots-track .qd.done { background: var(--red-main); }
-        .quiz-dots-track .qd.current { background: var(--red-main); transform: scale(1.4); }
-
-        .quiz-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; flex: 1; }
-        .quiz-loading-ring-wrap { position: relative; width: 84px; height: 84px; margin-bottom: 28px; display: flex; align-items: center; justify-content: center; }
-        .quiz-loading-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(193,18,31,0.12); border-top-color: var(--red-main); animation: quizspin 1.1s cubic-bezier(0.65,0.05,0.36,1) infinite; }
-        .quiz-loading-ring.ring-2 { inset: 10px; border-top-color: transparent; border-right-color: rgba(193,18,31,0.35); animation-duration: 1.6s; animation-direction: reverse; }
-        .quiz-loading-core { width: 10px; height: 10px; border-radius: 50%; background: var(--red-main); box-shadow: 0 0 14px var(--red-main); animation: quizpulse 1.1s ease-in-out infinite; }
-        @keyframes quizspin { to { transform: rotate(360deg); } }
-        @keyframes quizpulse { 0%,100% { opacity: 0.55; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.15); } }
-        .quiz-loading-pct { font-family: var(--font-heading); font-size: 40px; color: #fff; letter-spacing: 1px; margin-bottom: 10px; transition: opacity 0.2s ease; }
-        .quiz-loading-status { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; min-height: 16px; transition: opacity 0.35s ease, transform 0.35s ease; }
-        .quiz-loading-status.swap { opacity: 0; transform: translateY(4px); }
-
-        .quiz-result-badge { display: flex; justify-content: center; margin-bottom: 16px; opacity: 0; transform: scale(0.6) rotate(-10deg); animation: quizIconPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards; }
-        .quiz-result-badge-ring {
-            width: 66px; height: 66px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(193,18,31,0.16) 0%, rgba(193,18,31,0.02) 70%);
-            border: 1px solid var(--border-highlight);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .quiz-result-badge-ring svg { width: 30px; height: 30px; stroke: var(--red-main); fill: none; stroke-width: 1.6; }
-
-        .quiz-result-score { text-align: center; margin: 8px 0 26px; }
-        .qrs-label { font-size: 11px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display: block; }
-        .qrs-bar-track { height: 8px; border-radius: 8px; background: rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 8px; }
-        .qrs-bar-fill { height: 100%; width: 0%; border-radius: 8px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 1.1s cubic-bezier(0.22,1,0.36,1); }
-        .qrs-bar-pct { font-family: var(--font-heading); font-size: 22px; color: var(--red-main); }
-
-        .quiz-result-list { list-style: none; padding: 0; margin: 6px 0 30px; display: flex; flex-direction: column; gap: 12px; }
-        .quiz-result-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: #c9c9c9; line-height: 1.55; font-weight: 300;
-            opacity: 0; transform: translateX(-8px); animation: quizOptIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .quiz-result-list li svg { flex-shrink: 0; width: 16px; height: 16px; stroke: var(--red-main); fill: none; stroke-width: 2; margin-top: 2px; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .quiz-loading-ring, .quiz-loading-ring.ring-2, .quiz-loading-core { animation: none; }
-            .quiz-step, .quiz-step.out, .quiz-opt, .quiz-q-icon, .quiz-info-icon, .quiz-result-badge, .quiz-result-list li { animation: none !important; transition: opacity 0.2s ease !important; opacity: 1 !important; transform: none !important; filter: none !important; }
-        }
     </style>
 
   <script>
@@ -633,41 +343,7 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"/></noscript>
     
     </head>
-<body class="lock">
-
-    <div class="quiz-overlay" id="quizOverlay">
-        <div class="quiz-top">
-            <button class="quiz-back" id="quizBack" data-hidden="true" aria-label="Voltar para a etapa anterior">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            </button>
-            <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
-        </div>
-        <div class="quiz-body" id="quizBody"></div>
-    </div>
-
-    <div id="intro-overlay">
-        <div class="grid-bg-intro"></div>
-
-        <div class="intro-stage">
-            <span class="bracket tl"></span><span class="bracket tr"></span>
-            <span class="bracket bl"></span><span class="bracket br"></span>
-            <span class="hud-label" id="hudLabel">RENDERIZANDO_IDENTIDADE</span>
-            <span class="hud-pct" id="hudPct">00%</span>
-
-            <svg id="suit-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
-                <path class="draw" id="hBarL" d="M160,45 L160,310"/>
-                <path class="draw" id="hBarR" d="M240,45 L240,310"/>
-                <path class="draw" id="crossbar" d="M160,178 L240,178"/>
-            </svg>
-
-            <div id="text-reveal">
-                <div class="reveal-text" id="revealText"><span class="big-h">H</span>OMEM DE PRESENÇA</div>
-                <div class="reveal-rule" id="revealRule"></div>
-            </div>
-        </div>
-
-        <button class="skip-btn" id="skipBtn">Pular ›</button>
-    </div>
+<body>
 
     <div id="main-content">
         <div class="top-bar">
@@ -677,14 +353,6 @@
             </div>
             <div class="top-bar-sub" id="tb-exact"></div>
         </div>
-
-        <div class="ambient-bg"><div class="ambient-glow"></div></div>
-        <div class="particles-container">
-            <div class="particle p1">◆</div><div class="particle p2">+</div>
-            <div class="particle p3">▲</div><div class="particle p4">●</div>
-            <div class="particle p5">◆</div><div class="particle p6">+</div>
-        </div>
-        <div class="cinematic-grain"></div>
 
         <div class="wrapper">
             
@@ -863,9 +531,8 @@
                 </ul>
             </section>
 
-            <div class="section-divider"></div>
-
             <section class="offer-box scroll-reveal" style="padding: 36px 24px;">
+                <span class="offer-badge">Oferta por tempo limitado</span>
                 <div class="price-container" style="margin-bottom: 24px;">
                     <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
                         <span class="price-old" style="font-size:14px; color:#999;">De <s>R$ 47,90</s></span>
@@ -882,19 +549,10 @@
 
             <div class="section-divider"></div>
 
-            <section class="science-box scroll-reveal">
-                <svg class="svg-icon" style="width:40px; height:40px; margin-bottom: 20px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
-                <h2 class="section-title" style="font-size: 32px; margin-bottom: 16px;">Engenharia <br><span>Comportamental</span></h2>
-                <p>O desejo não é acaso — responde a gatilhos evolutivos no subconsciente. Decifre o código e troque a sorte pela previsibilidade.</p>
-            </section>
-
-            <div class="section-divider"></div>
-
             <section class="members-preview scroll-reveal">
                 <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
                 <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, no seu ritmo, em qualquer dispositivo.</p>
                 <div class="members-frame">
-                    <div class="browser-bar"><span></span><span></span><span></span></div>
                     <img src="79245d01-36e7-4931-adc8-ee1f09df994d.jpg" alt="Área de Membros" loading="lazy">
                 </div>
             </section>
@@ -1035,83 +693,6 @@
                         </div>
                         <p class="t-comment">"Curti bastante. É um conteúdo direto e fácil de entender. Já percebi alguns erros que eu cometia sem perceber."</p>
                     </div>
-
-                    <div class="testimonial-card">
-                        <div class="t-header">
-                            <div class="t-user-info">
-                                <div class="t-avatar">
-                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
-                                </div>
-                                <span class="t-name">Matheus R.</span>
-                            </div>
-                            <div class="t-stars">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                            </div>
-                        </div>
-                        <p class="t-comment">"Comprei sem criar muita expectativa, mas gostei. Tem várias ideias que fazem sentido quando você coloca em prática."</p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="t-header">
-                            <div class="t-user-info">
-                                <div class="t-avatar">
-                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
-                                </div>
-                                <span class="t-name">Gabriel S.</span>
-                            </div>
-                            <div class="t-stars">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                            </div>
-                        </div>
-                        <p class="t-comment">"Valeu o investimento. Não fica enrolando e vai direto ao ponto. Gostei da forma como os assuntos são explicados."</p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="t-header">
-                            <div class="t-user-info">
-                                <div class="t-avatar">
-                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
-                                </div>
-                                <span class="t-name">João P.</span>
-                            </div>
-                            <div class="t-stars">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                            </div>
-                        </div>
-                        <p class="t-comment">"Conteúdo bom e organizado. Algumas partes me fizeram enxergar situações que eu interpretava errado."</p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="t-header">
-                            <div class="t-user-info">
-                                <div class="t-avatar">
-                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
-                                </div>
-                                <span class="t-name">Rafael M.</span>
-                            </div>
-                            <div class="t-stars">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
-                            </div>
-                        </div>
-                        <p class="t-comment">"Achei que seria mais do mesmo, mas me surpreendeu. Linguagem simples, prática e fácil de aplicar no dia a dia. 👊🔥"</p>
-                    </div>
-
                 </div>
             </section>
 
@@ -1167,6 +748,7 @@
             </section>
 
             <section class="offer-box scroll-reveal" id="oferta">
+                <span class="offer-badge">Oferta por tempo limitado</span>
                 <div class="price-container">
                     <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
                         <span class="price-old" style="font-size:16px; color:#999;">De <s>R$ 47,90</s></span>
@@ -1254,482 +836,6 @@
     </div>
 
     <script>
-        function runIntroAnimation(){
-            var timers = [];
-            function schedule(fn, t){ timers.push(setTimeout(fn, t)); }
-
-            function setupDraw(el){
-                var len = el.getTotalLength ? el.getTotalLength() : 300;
-                el.style.strokeDasharray = len;
-                el.style.strokeDashoffset = len;
-            }
-            function trigger(el){ el.style.strokeDashoffset = 0; }
-
-            var drawEls = Array.prototype.slice.call(document.querySelectorAll('.draw'));
-            drawEls.forEach(setupDraw);
-
-            var hBarL=document.getElementById('hBarL'), hBarR=document.getElementById('hBarR'), crossbar=document.getElementById('crossbar'),
-                hudLabel=document.getElementById('hudLabel'), hudPct=document.getElementById('hudPct'),
-                revealText=document.getElementById('revealText'), revealRule=document.getElementById('revealRule'),
-                overlay=document.getElementById('intro-overlay'), skipBtn=document.getElementById('skipBtn'),
-                mainContent = document.getElementById('main-content');
-
-            var pctInterval = null;
-            function startPct(totalMs){
-                var start = Date.now();
-                hudPct.classList.add('show'); hudLabel.classList.add('show');
-                pctInterval = setInterval(function(){
-                    var pct = Math.min(100, Math.round((Date.now()-start)/totalMs*100));
-                    hudPct.textContent = (pct<10?'0':'')+pct+'%';
-                    if(pct>=100) clearInterval(pctInterval);
-                }, 40);
-            }
-            function stopPct(){ if(pctInterval) clearInterval(pctInterval); hudPct.textContent='100%'; }
-
-            function drawH(){
-                trigger(hBarL); trigger(hBarR);
-                schedule(function(){ trigger(crossbar); }, 400);
-            }
-
-            function splitH(){
-                hBarL.classList.add('split'); hBarR.classList.add('split');
-                crossbar.classList.add('hide');
-            }
-
-            function showText(){
-                revealText.classList.add('show');
-                schedule(function(){ revealRule.classList.add('show'); }, 150);
-            }
-
-            function fadeOutOverlay(){
-                overlay.classList.add('fade-out');
-                mainContent.classList.add('visible');
-                document.body.classList.remove('lock');
-                setTimeout(function(){ overlay.style.display = 'none'; revealOnScroll(); }, 1200);
-            }
-
-            function skip(){
-                timers.forEach(clearTimeout);
-                if(pctInterval) clearInterval(pctInterval);
-                fadeOutOverlay();
-            }
-            skipBtn.addEventListener('click', skip);
-
-            schedule(function(){ startPct(750); }, 0);
-            schedule(function(){ skipBtn.classList.add('show'); }, 350);
-
-            schedule(function(){ drawH(); }, 150);
-            schedule(function(){ stopPct(); }, 750);
-            schedule(function(){ splitH(); }, 850);
-            schedule(function(){ showText(); }, 1000);
-            schedule(function(){ fadeOutOverlay(); }, 2100);
-        }
-
-        /* =========================================
-           QUIZ / DIAGNÓSTICO — FUNIL DE ENTRADA
-           ========================================= */
-        var QUIZ_STORAGE_KEY = 'hdp_quiz_completed_v1';
-
-        /* Ícones (paths internos de svg viewBox 0 0 24 24) usados para reforçar
-           visualmente cada pergunta, cada card informativo e cada perfil de
-           resultado do quiz. */
-        var quizIcons = {
-            chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>',
-            pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>',
-            clock: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path>',
-            alert: '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>',
-            calendar: '<rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
-            spark: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>',
-            eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>',
-            target: '<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle>',
-            bulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>',
-            layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>',
-            steps: '<path d="M9 3H5a2 2 0 0 0-2 2v4m0 6v4a2 2 0 0 0 2 2h4m6 0h4a2 2 0 0 0 2-2v-4m0-6V5a2 2 0 0 0-2-2h-4"></path><circle cx="12" cy="12" r="2"></circle>',
-            gauge: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>',
-            smile: '<circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line>',
-            people: '<path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>'
-        };
-
-        var quizQuestions = [
-            { q: "Como andam suas conversas no WhatsApp ou Instagram ultimamente?",
-              icon: 'chat',
-              opts: [
-                {t:"Eu puxo quase toda conversa e as respostas demoram ou vêm secas", p:"ansioso"},
-                {t:"Converso bem, mas acabo tratando ela mais como amiga do que como alguém que eu quero conquistar", p:"nice"},
-                {t:"A conversa flui numa boa, só que ela me trata como 'aquele amigo legal'", p:"amigo"},
-                {t:"Vai bem no geral, mas eu travo na hora de dar o próximo passo", p:"quase"}
-              ]
-            },
-            { q: "Quando surge uma oportunidade pessoalmente, o que costuma acontecer?",
-              icon: 'pin',
-              opts: [
-                {t:"Eu travo e deixo a oportunidade passar", p:"ansioso"},
-                {t:"Puxo assunto numa boa, mas fico sem saber se estou 'demonstrando interesse demais'", p:"nice"},
-                {t:"Consigo conversar tranquilo, só que sempre vira 'papo de amigo'", p:"amigo"},
-                {t:"Chamo pra sair, mas não sei calibrar bem o passo seguinte", p:"quase"}
-              ]
-            },
-            { q: "Quando ela demora pra responder, qual é sua reação mais comum?",
-              icon: 'clock',
-              opts: [
-                {t:"Fico remoendo se fiz ou disse algo errado", p:"ansioso"},
-                {t:"Mando outra mensagem tentando 'reanimar' a conversa", p:"nice"},
-                {t:"Não muda muito, porque no fundo sei que não sou prioridade pra ela", p:"amigo"},
-                {t:"Espero, mas fico em dúvida se puxo de novo ou deixo quieto", p:"quase"}
-              ]
-            },
-            { q: "O que mais costuma dar errado nas suas interações?",
-              icon: 'alert',
-              opts: [
-                {t:"Tenho medo de parecer chato e acabo sumindo da conversa", p:"ansioso"},
-                {t:"Concordo com tudo que ela fala só pra agradar", p:"nice"},
-                {t:"Ela me pede conselho sobre outros caras", p:"amigo"},
-                {t:"Sei criar conexão, mas não sei transformar isso em algo a mais", p:"quase"}
-              ]
-            },
-            { q: "Como anda sua frequência de encontros ultimamente?",
-              icon: 'calendar',
-              opts: [
-                {t:"Faz tempo que não saio com alguém que eu realmente queira", p:"ansioso"},
-                {t:"Saio bastante como amigo, raramente como algo além disso", p:"nice"},
-                {t:"Sempre acabo ouvindo 'você é tipo um irmão pra mim'", p:"amigo"},
-                {t:"Saio de vez em quando, mas sinto que podia estar indo bem melhor", p:"quase"}
-              ]
-            },
-            { q: "O que você sente no momento antes de puxar assunto?",
-              icon: 'spark',
-              opts: [
-                {t:"Ansiedade e medo de ser ignorado", p:"ansioso"},
-                {t:"Vontade de agradar e não desagradar de jeito nenhum", p:"nice"},
-                {t:"Tranquilidade, mas já sei que não desperto 'aquele' tipo de interesse", p:"amigo"},
-                {t:"Confiança — só falta saber conduzir o momento certo", p:"quase"}
-              ]
-            }
-        ];
-
-        var quizInfos = [
-            { title: "Você sabia?", icon: 'bulb',
-              text: "A atração raramente nasce de um discurso bem montado. Na maioria das vezes, ela é uma resposta quase automática à forma como alguém se posiciona — antes mesmo da primeira frase ser dita." },
-            { title: "Um padrão que se repete", icon: 'layers',
-              text: "A maioria dos homens tenta resolver isso na base da lógica: mais mensagens, mais esforço, mais disponibilidade. O problema é que desejo não se constrói com insistência — se constrói com direção." },
-            { title: "A transformação acontece em fases", icon: 'steps',
-              text: "Postura interna, depois leitura de sinais, depois tensão. Pular etapas é exatamente o que trava a maioria dos homens no mesmo padrão, mês após mês." }
-        ];
-
-        var quizProfiles = {
-            ansioso: {
-                name: "O Ansioso Digital",
-                icon: 'alert',
-                score: 29,
-                text: "Suas respostas mostram ansiedade na comunicação — cada silêncio pesa mais do que devia, e isso derruba seu valor emocional a cada mensagem sem resposta.",
-                points: [
-                    "Dependência do reconhecimento dela pra se sentir seguro",
-                    "Excesso de mensagens sem retorno proporcional",
-                    "Dificuldade de manter o próprio ritmo dentro da conversa"
-                ]
-            },
-            nice: {
-                name: "O Nice Guy Sem Tensão",
-                icon: 'smile',
-                score: 41,
-                text: "Você constrói simpatia rápido, mas raramente gera desejo. Concordar demais te deixa confortável de conversar — e fácil de esquecer.",
-                points: [
-                    "Falta de polaridade nas conversas",
-                    "Medo de discordar ou criar tensão saudável",
-                    "Presença agradável, mas pouco magnética"
-                ]
-            },
-            amigo: {
-                name: "Estagnado na Zona de Amizade",
-                icon: 'people',
-                score: 53,
-                text: "Você já tem conexão real — o problema é que ela nunca te viu como opção romântica. Isso não se resolve com mais tempo, se resolve com reposicionamento.",
-                points: [
-                    "Entrada errada na relação desde os primeiros contatos",
-                    "Ausência de sinais claros de interesse romântico",
-                    "Tempo investido em interações que já esfriaram"
-                ]
-            },
-            quase: {
-                name: "Quase Lá — Falta Consistência",
-                icon: 'target',
-                score: 68,
-                text: "Sua base já é boa. O que falta não é personalidade, é direção: saber quando escalar, quando recuar e não travar no momento decisivo.",
-                points: [
-                    "Falta de leitura precisa do momento certo de agir",
-                    "Inconsistência entre boas conversas e resultados reais",
-                    "Ausência de um método replicável — depende da sorte do dia"
-                ]
-            }
-        };
-
-        function initQuiz(){
-            var overlay = document.getElementById('quizOverlay');
-            var body = document.getElementById('quizBody');
-            var backBtn = document.getElementById('quizBack');
-            var progressFill = document.getElementById('quizProgressFill');
-
-            var seq = [{type:'cover'}];
-            var order = [0,1,'i0',2,3,'i1',4,5,'i2'];
-            order.forEach(function(o){
-                if (typeof o === 'number') seq.push({type:'q', idx:o});
-                else seq.push({type:'info', idx:parseInt(o.slice(1),10)});
-            });
-            seq.push({type:'loading'});
-            seq.push({type:'result'});
-
-            var countedTotal = 9;
-            var answers = new Array(quizQuestions.length).fill(null);
-            var stepIndex = 0;
-
-            function countedPosition(idx){
-                var c = 0;
-                for (var i=1; i<=idx; i++){
-                    if (seq[i].type==='q' || seq[i].type==='info') c++;
-                }
-                return c;
-            }
-
-            function updateChrome(){
-                var step = seq[stepIndex];
-                if (step.type==='cover' || step.type==='loading' || step.type==='result'){
-                    backBtn.setAttribute('data-hidden','true');
-                } else {
-                    backBtn.setAttribute('data-hidden', stepIndex<=1 ? 'true':'false');
-                }
-                if (step.type==='q' || step.type==='info'){
-                    var pos = countedPosition(stepIndex);
-                    progressFill.style.width = Math.round((pos/countedTotal)*100)+'%';
-                } else if (step.type==='cover'){
-                    progressFill.style.width = '0%';
-                } else {
-                    progressFill.style.width = '100%';
-                }
-            }
-
-            function computeProfile(){
-                var tally = {ansioso:0, nice:0, amigo:0, quase:0};
-                answers.forEach(function(p){ if(p) tally[p]++; });
-                var priority = ['ansioso','nice','amigo','quase'];
-                var best = priority[0];
-                priority.forEach(function(k){ if (tally[k] > tally[best]) best = k; });
-                return best;
-            }
-
-            function renderCover(){
-                return '' +
-                    '<span class="quiz-eyebrow">Diagnóstico Rápido · 2 minutos</span>' +
-                    '<h2 class="quiz-title">Descubra por que suas <span>conversas não evoluem</span></h2>' +
-                    '<p class="quiz-sub">Responda 6 perguntas rápidas e receba um diagnóstico personalizado com os pontos que estão travando você agora.</p>' +
-                    '<div class="quiz-cta"><button class="btn" id="quizStartBtn" type="button">Iniciar Diagnóstico</button></div>';
-            }
-
-            function renderQuestion(idx){
-                var q = quizQuestions[idx];
-                var optsHtml = q.opts.map(function(o, i){
-                    var sel = answers[idx]===o.p ? ' selected':'';
-                    var delay = (0.08 + i*0.07).toFixed(2);
-                    return '<button class="quiz-opt'+sel+'" data-p="'+o.p+'" type="button" style="animation-delay:'+delay+'s"><span class="quiz-opt-dot"></span><span>'+o.t+'</span></button>';
-                }).join('');
-                var dotsHtml = quizQuestions.map(function(_, i){
-                    var cls = 'qd';
-                    if (i === idx) cls += ' current';
-                    else if (answers[i]) cls += ' done';
-                    return '<span class="'+cls+'"></span>';
-                }).join('');
-                return '' +
-                    '<div class="quiz-dots-track">'+dotsHtml+'</div>' +
-                    '<div class="quiz-q-icon"><span class="quiz-q-icon-badge"><svg viewBox="0 0 24 24">'+quizIcons[q.icon]+'</svg></span></div>' +
-                    '<span class="quiz-eyebrow" style="text-align:left;">Pergunta '+(idx+1)+' de '+quizQuestions.length+'</span>' +
-                    '<h2 class="quiz-title left">'+q.q+'</h2>' +
-                    '<div class="quiz-options">'+optsHtml+'</div>';
-            }
-
-            function renderInfo(idx){
-                var info = quizInfos[idx];
-                return '' +
-                    '<div class="quiz-info-icon"><svg viewBox="0 0 24 24">'+quizIcons[info.icon]+'</svg></div>' +
-                    '<h2 class="quiz-title">'+info.title+'</h2>' +
-                    '<div class="quiz-info-box">'+info.text+'</div>' +
-                    '<div class="quiz-cta"><button class="btn" id="quizContinueBtn" type="button">Continuar</button></div>';
-            }
-
-            function renderLoading(){
-                return '<div class="quiz-loading">' +
-                    '<div class="quiz-loading-ring-wrap">' +
-                        '<div class="quiz-loading-ring"></div>' +
-                        '<div class="quiz-loading-ring ring-2"></div>' +
-                        '<div class="quiz-loading-core"></div>' +
-                    '</div>' +
-                    '<div class="quiz-loading-pct" id="quizLoadPct">0%</div>' +
-                    '<div class="quiz-loading-status" id="quizLoadStatus">Cruzando suas respostas...</div>' +
-                    '</div>';
-            }
-
-            function renderResult(){
-                var key = computeProfile();
-                var prof = quizProfiles[key];
-                var pointsHtml = prof.points.map(function(p, i){
-                    var delay = (0.15 + i*0.1).toFixed(2);
-                    return '<li style="animation-delay:'+delay+'s"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>'+p+'</span></li>';
-                }).join('');
-                return '' +
-                    '<span class="quiz-eyebrow">Diagnóstico Concluído</span>' +
-                    '<div class="quiz-result-badge"><span class="quiz-result-badge-ring"><svg viewBox="0 0 24 24">'+quizIcons[prof.icon]+'</svg></span></div>' +
-                    '<h2 class="quiz-title">Perfil identificado:<br><span>'+prof.name+'</span></h2>' +
-                    '<p class="quiz-sub">'+prof.text+'</p>' +
-                    '<div class="quiz-result-score">' +
-                        '<span class="qrs-label">Índice de Presença Masculina</span>' +
-                        '<div class="qrs-bar-track"><div class="qrs-bar-fill" id="qrsBarFill" style="width:0%"></div></div>' +
-                        '<span class="qrs-bar-pct" id="qrsBarPct">0%</span>' +
-                    '</div>' +
-                    '<ul class="quiz-result-list">'+pointsHtml+'</ul>' +
-                    '<div class="quiz-cta"><button class="btn" id="quizCtaBtn" type="button">Ver o Método Que Resolve Isso</button></div>';
-            }
-
-            function animateCount(el, target){
-                var t0 = performance.now(); var dur = 900;
-                function step(now){
-                    var p = Math.min(1, (now-t0)/dur);
-                    el.textContent = Math.round(p*target)+'%';
-                    if (p<1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-            }
-
-            function runLoading(){
-                var statuses = ["Cruzando suas respostas...", "Identificando pontos de bloqueio...", "Calculando seu Índice de Presença Masculina...", "Montando seu diagnóstico..."];
-                var t0 = performance.now(); var dur = 2600; var si = 0;
-                var statusTimer = setInterval(function(){
-                    si = (si+1) % statuses.length;
-                    var statusEl = document.getElementById('quizLoadStatus');
-                    if (statusEl){
-                        statusEl.classList.add('swap');
-                        setTimeout(function(){
-                            statusEl.textContent = statuses[si];
-                            statusEl.classList.remove('swap');
-                        }, 180);
-                    }
-                }, 700);
-                function tick(now){
-                    var p = Math.min(1, (now-t0)/dur);
-                    var pctEl = document.getElementById('quizLoadPct');
-                    if (pctEl) pctEl.textContent = Math.round(p*100)+'%';
-                    if (p<1) requestAnimationFrame(tick);
-                    else { clearInterval(statusTimer); setTimeout(goNext, 300); }
-                }
-                requestAnimationFrame(tick);
-            }
-
-            function bindStep(step){
-                if (step.type === 'cover'){
-                    var startBtn = document.getElementById('quizStartBtn');
-                    if (startBtn) startBtn.addEventListener('click', goNext);
-                } else if (step.type === 'q'){
-                    var opts = body.querySelectorAll('.quiz-opt');
-                    opts.forEach(function(btn){
-                        btn.addEventListener('click', function(){
-                            if (btn.classList.contains('selected')) return;
-                            opts.forEach(function(o){ o.classList.remove('selected'); });
-                            btn.classList.add('selected');
-                            answers[step.idx] = btn.getAttribute('data-p');
-                            setTimeout(goNext, 320);
-                        });
-                    });
-                } else if (step.type === 'info'){
-                    var contBtn = document.getElementById('quizContinueBtn');
-                    if (contBtn) contBtn.addEventListener('click', goNext);
-                } else if (step.type === 'result'){
-                    var key = computeProfile();
-                    var prof = quizProfiles[key];
-                    setTimeout(function(){
-                        var fill = document.getElementById('qrsBarFill');
-                        var pct = document.getElementById('qrsBarPct');
-                        if (fill) fill.style.width = prof.score+'%';
-                        if (pct) animateCount(pct, prof.score);
-                    }, 300);
-                    var ctaBtn = document.getElementById('quizCtaBtn');
-                    if (ctaBtn) ctaBtn.addEventListener('click', finishQuiz);
-                }
-            }
-
-            var STEP_TRANSITION_MS = 220;
-
-            function doRenderStep(){
-                var step = seq[stepIndex];
-                var html = '';
-                if (step.type === 'cover') html = renderCover();
-                else if (step.type === 'q') html = renderQuestion(step.idx);
-                else if (step.type === 'info') html = renderInfo(step.idx);
-                else if (step.type === 'loading') html = renderLoading();
-                else if (step.type === 'result') html = renderResult();
-
-                body.innerHTML = '<div class="quiz-step" id="quizStepInner">'+html+'</div>';
-                var el = document.getElementById('quizStepInner');
-                requestAnimationFrame(function(){
-                    requestAnimationFrame(function(){ el.classList.add('in'); });
-                });
-                bindStep(step);
-                updateChrome();
-            }
-
-            // Faz um crossfade suave entre a etapa atual e a próxima, em vez
-            // de trocar o conteúdo de forma seca e instantânea.
-            function renderStep(){
-                var currentEl = document.getElementById('quizStepInner');
-                if (currentEl){
-                    currentEl.classList.remove('in');
-                    currentEl.classList.add('out');
-                    setTimeout(doRenderStep, STEP_TRANSITION_MS);
-                } else {
-                    doRenderStep();
-                }
-            }
-
-            function goNext(){
-                if (stepIndex < seq.length-1){
-                    stepIndex++;
-                    renderStep();
-                    if (seq[stepIndex].type==='loading') setTimeout(runLoading, STEP_TRANSITION_MS + 60);
-                }
-            }
-            function goPrev(){
-                if (stepIndex > 0 && seq[stepIndex].type!=='loading' && seq[stepIndex].type!=='result'){
-                    stepIndex--;
-                    renderStep();
-                }
-            }
-            backBtn.addEventListener('click', goPrev);
-
-            function finishQuiz(){
-                try { localStorage.setItem(QUIZ_STORAGE_KEY, '1'); } catch(e){}
-                overlay.classList.add('quiz-hide');
-                var introOverlay = document.getElementById('intro-overlay');
-                introOverlay.style.display = 'flex';
-                setTimeout(function(){
-                    overlay.style.display = 'none';
-                    runIntroAnimation();
-                }, 400);
-            }
-
-            renderStep();
-        }
-
-        (function(){
-            try {
-                if (localStorage.getItem(QUIZ_STORAGE_KEY)) {
-                    document.getElementById('quizOverlay').style.display = 'none';
-                    runIntroAnimation();
-                } else {
-                    document.getElementById('intro-overlay').style.display = 'none';
-                    initQuiz();
-                }
-            } catch(e){
-                document.getElementById('intro-overlay').style.display = 'none';
-                initQuiz();
-            }
-        })();
-
         /**
          * Timer de oferta.
          *
