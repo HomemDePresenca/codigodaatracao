@@ -237,7 +237,7 @@
         /* URGENCY BAR */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10, 0, 0, 0.97); backdrop-filter: blur(4px);
+            background: rgba(10, 0, 0, 0.97); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
             border-bottom: 1px solid rgba(193, 18, 31, 0.2);
             color: #d1d1d1; text-align: center;
             padding: 8px 16px; z-index: 1000;
@@ -465,7 +465,7 @@
         /* STICKY CTA */
         .sticky-cta {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(3, 3, 3, 0.97); backdrop-filter: blur(4px);
+            background: rgba(3, 3, 3, 0.97); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
             border-top: 1px solid rgba(193, 18, 31, 0.1); padding: 16px 24px;
             z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -483,6 +483,7 @@
            intensidade, para aliviar o processamento continuo. */
         @media (max-width: 480px) {
             .top-bar, .sticky-cta {
+                -webkit-backdrop-filter: blur(2px);
                 backdrop-filter: blur(2px);
             }
         }
@@ -692,7 +693,7 @@
                     <span class="white">Código</span>
                     <span class="red">da Atração</span>
                 </h1>
-                <p class="subheadline">Chega de mandar mensagem e ficar esperando a resposta que não vem. Aqui você aprende a ler o que ela realmente está sinalizando, conduzir a conversa sem parecer carente e virar a opção que ela escolhe — não a que ela deixa esperando.</p>
+                <p class="subheadline">Chega de mandar mensagem e ficar no vácuo. Aprenda a ler os sinais, conduzir a conversa e virar a opção que ela escolhe — não a que ela deixa esperando.</p>
                 
                 <a href="#oferta" class="btn">
                     Desbloquear Acesso
@@ -704,11 +705,11 @@
 
             <section class="identify scroll-reveal">
                 <h2 class="section-title" style="font-size: 32px;">Isso já <br><span>aconteceu com você?</span></h2>
-                <p class="identify-intro">Leia com calma. Se você bateu com pelo menos dois desses pontos, o problema não é você — é que ninguém nunca te ensinou o método certo.</p>
+                <p class="identify-intro">Se pelo menos dois desses pontos baterem, o problema não é você — é que ninguém te ensinou o método certo.</p>
                 <ul class="audience-list" style="margin-top:24px;">
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você manda um "oi" de manhã, ela só vê à noite e responde "kkk oi" — e você fica sem saber se ela sumiu ou só tá enrolando.
+                        Você manda um "oi" de manhã e só recebe um "kkk oi" seco à noite — sem saber se ela sumiu ou tá enrolando.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
@@ -716,11 +717,11 @@
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Ela já te chamou de "amigo" bem na sua cara, e você só sorriu porque não sabia o que dizer.
+                        Ela já te chamou de "amigo" na sua cara, e você só sorriu sem saber o que dizer.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        A abertura apareceu na sua frente e você travou. Ela seguiu em frente, e você ficou remoendo por dias o que devia ter falado.
+                        A abertura apareceu e você travou. Ela seguiu em frente, e você ficou remoendo o que devia ter falado.
                     </li>
                 </ul>
             </section>
@@ -732,15 +733,15 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <h4>Fase 1: Desconstrução</h4>
-                        <p>Você para de precisar da aprovação dela pra se sentir bem. Isso muda sua postura, seu tom de voz, até o jeito que você entra numa sala — antes de abrir a boca.</p>
+                        <p>Você para de precisar da aprovação dela. Isso muda sua postura e seu tom — antes mesmo de abrir a boca.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 2: Calibração</h4>
-                        <p>Você começa a notar o que ela não fala. Um olhar mais longo, uma resposta mais rápida, um "kk" a mais — e sabe na hora se é hora de puxar ou de dar um passo atrás.</p>
+                        <p>Você começa a notar o que ela não fala. Um olhar mais longo, uma resposta mais rápida — e sabe na hora se avança ou recua.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 3: Magnetismo</h4>
-                        <p>Deixa de ser trabalho. Vira automático — a conversa flui, ela ri de verdade, e a tensão aparece sozinha, sem você forçar nada.</p>
+                        <p>Vira automático — a conversa flui, ela ri de verdade, e a tensão aparece sozinha.</p>
                     </div>
                 </div>
             </section>
@@ -755,13 +756,13 @@
                     <li>Sufocam a conversa com excesso de mensagens</li>
                     <li>Demonstram interesse e disponibilidade quando deveriam demonstrar mistério</li>
                 </ul>
-                <p>O resultado? Você vira apenas mais um na tela do celular dela, caminhando a passos largos para a zona de amizade.</p>
+                <p>O resultado? Você vira só mais um na tela dela, a caminho da zona de amizade.</p>
                 
                 <div class="highlight-box">
                     "A atração não é uma escolha consciente. É uma resposta biológica autônoma a estímulos específicos. Quem domina o estímulo, controla a resposta."
                 </div>
                 
-                <p>O <strong>Código da Atração</strong> não é sobre frases feitas ou joguinhos manipulativos. É sobre entender a engenharia por trás do desejo feminino e alinhar a sua presença para que ela invista na interação.</p>
+                <p>O <strong>Código da Atração</strong> não é sobre frases prontas. É sobre entender a engenharia do desejo e alinhar sua presença pra ela investir na conversa.</p>
 
                 <ul class="target-list scroll-reveal">
                     <li>Pare de tentar manter o assunto vivo e aprenda a usar o silêncio a seu favor.</li>
@@ -774,7 +775,7 @@
             <div class="section-divider"></div>
 
             <section class="mid-cta scroll-reveal">
-                <p>Agora você já entende a engenharia por trás do desejo. <strong>A dúvida não é se o método funciona — é se você vai aplicá-lo hoje ou vai continuar refém da sorte.</strong></p>
+                <p>Agora você entende a engenharia por trás do desejo. <strong>A dúvida não é se funciona — é se você vai aplicar hoje ou continuar na mesma.</strong></p>
                 <a href="#oferta" class="btn">
                     Quero Aplicar o Método
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -785,27 +786,27 @@
 
             <section class="audience scroll-reveal">
                 <h2 class="section-title">Para quem é <br><span>este método</span></h2>
-                <p style="font-size: 14px; color: var(--white-sec); text-align: center; font-weight: 300; line-height: 1.6;">Se você se reconhece em pelo menos um dos pontos abaixo, o Código da Atração foi construído para você.</p>
+                <p style="font-size: 14px; color: var(--white-sec); text-align: center; font-weight: 300; line-height: 1.6;">Se você se reconhece em pelo menos um ponto abaixo, esse método é pra você.</p>
                 <ul class="audience-list">
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Não sabe identificar quando existe interesse real — e acaba deixando passar oportunidades claras.
+                        Não sabe identificar interesse real — e deixa passar oportunidades claras.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Perde conversas promissoras porque não sabe como conduzir depois do "oi, tudo bem?".
+                        Perde conversas boas por não saber conduzir depois do "oi, tudo bem?".
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Sempre acaba na zona de amizade, mesmo quando a intenção era outra desde o início.
+                        Sempre acaba na zona de amizade, mesmo com outra intenção desde o início.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Tem dificuldade em criar conexão real e sente que as conversas ficam rasas ou mornas.
+                        Tem dificuldade em criar conexão real — as conversas ficam rasas ou mornas.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Trava na hora de responder e só pensa na resposta perfeita depois que a chance já passou.
+                        Trava na hora de responder e só pensa na resposta certa depois que a chance passou.
                     </li>
                 </ul>
             </section>
@@ -820,7 +821,7 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         Módulo 1: Arquitetura de Valor
                     </h3>
-                    <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota suas chances logo nos 5 minutos iniciais da interação.</p>
+                    <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota tudo logo nos primeiros minutos.</p>
                     <div class="card-insight">O erro fatal de postura que destrói sua autoridade instantaneamente.</div>
                 </div>
                 
@@ -829,7 +830,7 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         Módulo 2: Decodificação
                     </h3>
-                    <p>O mapeamento definitivo para ler quando ela está interessada de verdade, quando está jogando e o momento exato de escalar a situação.</p>
+                    <p>O mapeamento pra ler quando ela está interessada de verdade e o momento certo de escalar.</p>
                     <div class="card-insight">A "Regra do Contato Visual" que altera todo o balanço de poder.</div>
                 </div>
                 
@@ -838,14 +839,14 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                         Módulo 3: Tensão e Polaridade
                     </h3>
-                    <p>A transição exata de uma conversa monótona (lógica) para uma interação visceral (emocional), criando uma conexão magnética em minutos.</p>
+                    <p>A transição de uma conversa monótona pra uma interação visceral, criando conexão magnética em minutos.</p>
                     <div class="card-insight">Estruturas precisas para gerar tensão por mensagem sem soar desesperado.</div>
                 </div>
 
                 <ul class="outcomes-list">
                     <li>
                         <span class="outcomes-num">1</span>
-                        <p>Como evitar os <strong>erros que fazem uma mulher perder o interesse</strong> nos primeiros minutos de conversa.</p>
+                        <p>Como evitar os <strong>erros que matam o interesse</strong> logo nos primeiros minutos.</p>
                     </li>
                     <li>
                         <span class="outcomes-num">2</span>
@@ -864,17 +865,34 @@
 
             <div class="section-divider"></div>
 
+            <section class="offer-box scroll-reveal" style="padding: 36px 24px;">
+                <div class="price-container" style="margin-bottom: 24px;">
+                    <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                        <span class="price-old" style="font-size:14px; color:#999;">De <s>R$ 47,90</s></span>
+                        <span style="background:rgba(193,18,31,0.12); color:var(--red-main); font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:20px; border:1px solid rgba(193,18,31,0.3);">-69% OFF</span>
+                    </div>
+                    <span class="price-new" style="font-size:44px;">R$ 14,70</span>
+                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x sem juros</span>
+                </div>
+                <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
+                    Já Quero Dominar o Método
+                </a>
+                <p style="font-size:12px; color:#777; margin-top:18px;">7 dias de garantia. Se não funcionar, você reembolsa.</p>
+            </section>
+
+            <div class="section-divider"></div>
+
             <section class="science-box scroll-reveal">
                 <svg class="svg-icon" style="width:40px; height:40px; margin-bottom: 20px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
                 <h2 class="section-title" style="font-size: 32px; margin-bottom: 16px;">Engenharia <br><span>Comportamental</span></h2>
-                <p>O desejo não ocorre por acaso. Ele responde a gatilhos evolutivos enraizados no subconsciente. Ao decifrar esse código, você deixa de "tentar a sorte" e passa a operar com previsibilidade cirúrgica.</p>
+                <p>O desejo não é acaso — responde a gatilhos evolutivos no subconsciente. Decifre o código e troque a sorte pela previsibilidade.</p>
             </section>
 
             <div class="section-divider"></div>
 
             <section class="members-preview scroll-reveal">
                 <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
-                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, direto e disponível para consumir no seu ritmo, de qualquer dispositivo.</p>
+                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, no seu ritmo, em qualquer dispositivo.</p>
                 <div class="members-frame">
                     <div class="browser-bar"><span></span><span></span><span></span></div>
                     <img src="79245d01-36e7-4931-adc8-ee1f09df994d.jpg" alt="Área de Membros" loading="lazy">
@@ -1100,7 +1118,7 @@
             <div class="section-divider"></div>
 
             <section class="mid-cta scroll-reveal">
-                <p>Você já viu prints reais, a área de membros e o que outros alunos disseram. <strong>As vagas com desconto são limitadas e não voltam ao preço promocional.</strong></p>
+                <p>Você já viu os prints, a área de membros e o que os alunos disseram. <strong>As vagas com desconto são limitadas.</strong></p>
                 <a href="#oferta" class="btn">
                     Garantir Minha Vaga Agora
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -1193,7 +1211,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red-main)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         Garantia Blindada
                     </h3>
-                    <p>Você tem <strong>7 dias</strong> para colocar o método à prova. Se você aplicar a engenharia ensinada e achar que não transformou a sua dinâmica social, solicite o reembolso. O risco financeiro é integralmente nosso.</p>
+                    <p>Você tem <strong>7 dias</strong> pra testar o método. Se aplicar e sentir que não mudou sua dinâmica social, pede o reembolso. O risco é nosso.</p>
                 </div>
             </section>
 
@@ -1204,19 +1222,19 @@
                 
                 <div class="faq-item">
                     <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Absolutamente. Após a confirmação do pagamento via Pix ou Cartão, suas credenciais de acesso são enviadas automaticamente para o seu e-mail.</p></div>
+                    <div class="faq-answer"><p>Sim. Assim que o pagamento é confirmado (Pix ou cartão), o acesso chega automaticamente no seu e-mail.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Posso parcelar a compra? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sim. É um pagamento único (não é assinatura) e pode ser feito à vista no Pix ou parcelado em até 4x sem juros no cartão de crédito.</p></div>
+                    <div class="faq-answer"><p>Sim, pagamento único — não é assinatura. Dá pra pagar à vista no Pix ou parcelar em até 3x sem juros no cartão.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>É um guia prático 100% digital. Projetado para consumo anônimo e ágil no seu celular, tablet ou computador.</p></div>
+                    <div class="faq-answer"><p>Guia 100% digital, pra consumir de forma rápida e discreta no celular, tablet ou computador.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Funciona para perfis introvertidos? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>O método não obriga você a encenar extroversão. Ele ensina a usar a sua natureza observadora para construir mistério e tensão silenciosa — a arma mais forte dos introvertidos.</p></div>
+                    <div class="faq-answer"><p>Sim. Ele não pede que você finja extroversão — ensina a usar sua natureza observadora pra construir mistério, a maior arma dos introvertidos.</p></div>
                 </div>
             </section>
 
@@ -1333,7 +1351,7 @@
         };
 
         var quizQuestions = [
-            { q: "Como estão indo suas conversas no WhatsApp/Instagram com garotas que você tem interesse?",
+            { q: "Como andam suas conversas no WhatsApp ou Instagram ultimamente?",
               icon: 'chat',
               opts: [
                 {t:"Eu puxo quase toda conversa e as respostas demoram ou vêm secas", p:"ansioso"},
@@ -1342,7 +1360,7 @@
                 {t:"Vai bem no geral, mas eu travo na hora de dar o próximo passo", p:"quase"}
               ]
             },
-            { q: "Quando surge uma oportunidade na rua, faculdade ou balada, o que geralmente acontece?",
+            { q: "Quando surge uma oportunidade pessoalmente, o que costuma acontecer?",
               icon: 'pin',
               opts: [
                 {t:"Eu travo e deixo a oportunidade passar", p:"ansioso"},
@@ -1351,7 +1369,7 @@
                 {t:"Chamo pra sair, mas não sei calibrar bem o passo seguinte", p:"quase"}
               ]
             },
-            { q: "Quando ela demora pra responder uma mensagem, qual é a sua reação mais comum?",
+            { q: "Quando ela demora pra responder, qual é sua reação mais comum?",
               icon: 'clock',
               opts: [
                 {t:"Fico remoendo se fiz ou disse algo errado", p:"ansioso"},
@@ -1360,7 +1378,7 @@
                 {t:"Espero, mas fico em dúvida se puxo de novo ou deixo quieto", p:"quase"}
               ]
             },
-            { q: "O que mais se parece com o que costuma dar errado nas suas interações?",
+            { q: "O que mais costuma dar errado nas suas interações?",
               icon: 'alert',
               opts: [
                 {t:"Tenho medo de parecer chato e acabo sumindo da conversa", p:"ansioso"},
@@ -1369,7 +1387,7 @@
                 {t:"Sei criar conexão, mas não sei transformar isso em algo a mais", p:"quase"}
               ]
             },
-            { q: "Como está a sua frequência de encontros reais nos últimos meses?",
+            { q: "Como anda sua frequência de encontros ultimamente?",
               icon: 'calendar',
               opts: [
                 {t:"Faz tempo que não saio com alguém que eu realmente queira", p:"ansioso"},
@@ -1378,7 +1396,7 @@
                 {t:"Saio de vez em quando, mas sinto que podia estar indo bem melhor", p:"quase"}
               ]
             },
-            { q: "O que você sente um segundo antes de puxar assunto com alguém que te interessa?",
+            { q: "O que você sente no momento antes de puxar assunto?",
               icon: 'spark',
               opts: [
                 {t:"Ansiedade e medo de ser ignorado", p:"ansioso"},
@@ -1403,7 +1421,7 @@
                 name: "O Ansioso Digital",
                 icon: 'alert',
                 score: 29,
-                text: "Suas respostas mostram um padrão de ansiedade na comunicação — você segue no controle dela, e cada silêncio pesa mais do que devia. Isso faz seu valor emocional cair a cada mensagem sem resposta.",
+                text: "Suas respostas mostram ansiedade na comunicação — cada silêncio pesa mais do que devia, e isso derruba seu valor emocional a cada mensagem sem resposta.",
                 points: [
                     "Dependência do reconhecimento dela pra se sentir seguro",
                     "Excesso de mensagens sem retorno proporcional",
@@ -1414,7 +1432,7 @@
                 name: "O Nice Guy Sem Tensão",
                 icon: 'smile',
                 score: 41,
-                text: "Você constrói simpatia rápido, mas raramente gera desejo. Concordar demais e evitar qualquer atrito te deixa confortável de se conversar — e fácil de esquecer.",
+                text: "Você constrói simpatia rápido, mas raramente gera desejo. Concordar demais te deixa confortável de conversar — e fácil de esquecer.",
                 points: [
                     "Falta de polaridade nas conversas",
                     "Medo de discordar ou criar tensão saudável",
@@ -1425,7 +1443,7 @@
                 name: "Estagnado na Zona de Amizade",
                 icon: 'people',
                 score: 53,
-                text: "Você já tem conexão real — o problema é que ela nunca te viu como opção romântica desde o início. Isso não se resolve com mais tempo, se resolve com reposicionamento.",
+                text: "Você já tem conexão real — o problema é que ela nunca te viu como opção romântica. Isso não se resolve com mais tempo, se resolve com reposicionamento.",
                 points: [
                     "Entrada errada na relação desde os primeiros contatos",
                     "Ausência de sinais claros de interesse romântico",
@@ -1436,7 +1454,7 @@
                 name: "Quase Lá — Falta Consistência",
                 icon: 'target',
                 score: 68,
-                text: "Sua base já é boa. O que falta não é personalidade, é direção: saber exatamente quando escalar, quando recuar e como não travar no momento decisivo.",
+                text: "Sua base já é boa. O que falta não é personalidade, é direção: saber quando escalar, quando recuar e não travar no momento decisivo.",
                 points: [
                     "Falta de leitura precisa do momento certo de agir",
                     "Inconsistência entre boas conversas e resultados reais",
@@ -1502,7 +1520,7 @@
                 return '' +
                     '<span class="quiz-eyebrow">Diagnóstico Rápido · 2 minutos</span>' +
                     '<h2 class="quiz-title">Descubra por que suas <span>conversas não evoluem</span></h2>' +
-                    '<p class="quiz-sub">Responda 8 perguntas rápidas. No final, você recebe um diagnóstico personalizado com os pontos exatos que estão travando você agora.</p>' +
+                    '<p class="quiz-sub">Responda 6 perguntas rápidas e receba um diagnóstico personalizado com os pontos que estão travando você agora.</p>' +
                     '<div class="quiz-cta"><button class="btn" id="quizStartBtn" type="button">Iniciar Diagnóstico</button></div>';
             }
 
