@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Código da Atração | A Ciência do Desejo</title>
@@ -43,7 +43,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding-top: 64px; 
+            padding-top: 40px; 
         }
 
         /* Bloqueio de rolagem durante a animação */
@@ -53,19 +53,152 @@
             padding-top: 0;
         }
 
+        /* =========================================
+           ANIMAÇÃO INTRO (REFINADA & MOBILE-FIRST)
+           ========================================= */
+        #intro-overlay {
+            position: fixed; inset: 0; z-index: 99999;
+            background: radial-gradient(circle at 50% 40%, #0a0102 0%, var(--bg-deep) 80%);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+        }
+        #intro-overlay.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .grid-bg-intro {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(193, 18, 31, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(193, 18, 31, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridpan 40s linear infinite;
+        }
+        @keyframes gridpan {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: 400px 0, 0 400px; }
+        }
+
+        .intro-stage {
+            position: relative;
+            width: min(85vw, 380px);
+            aspect-ratio: 400/420;
+            perspective: 1000px;
+        }
+
+        .bracket { position: absolute; width: 20px; height: 20px; border-color: var(--red-dusk); opacity: 0.8; }
+        .bracket.tl { top: -10px; left: -10px; border-top: 1px solid; border-left: 1px solid; }
+        .bracket.tr { top: -10px; right: -10px; border-top: 1px solid; border-right: 1px solid; }
+        .bracket.bl { bottom: -10px; left: -10px; border-bottom: 1px solid; border-left: 1px solid; }
+        .bracket.br { bottom: -10px; right: -10px; border-bottom: 1px solid; border-right: 1px solid; }
+
+        .hud-label, .hud-pct {
+            position: absolute; font-family: monospace; font-size: 10px;
+            letter-spacing: 2px; color: var(--red-main); opacity: 0;
+        }
+        .hud-label { left: -10px; top: -30px; white-space: nowrap; }
+        .hud-label.show { animation: hudflicker 0.6s ease forwards; }
+        .hud-pct { right: -6px; bottom: -28px; font-size: 11px; }
+        .hud-pct.show { opacity: 0.9; }
+
+        @keyframes hudflicker { 0%{opacity:0;} 30%{opacity:1;} 50%{opacity:0.2;} 100%{opacity:0.9;} }
+
+        #suit-svg {
+            width: 100%; height: 100%; display: block; transform-style: preserve-3d;
+            animation: spinIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @keyframes spinIn {
+            0% { transform: rotateY(-90deg) scale(0.85); opacity: 0; filter: blur(5px); }
+            100% { transform: rotateY(0deg) scale(1); opacity: 1; filter: blur(0px); }
+        }
+
+        .draw {
+            fill: none; stroke: rgba(255,255,255,0.15); stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round;
+            transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease, stroke 1s ease;
+        }
+        .draw.accent { stroke: var(--red-main); stroke-width: 2.2; }
+
+        #hBarL, #hBarR { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
+        #hBarL.split { transform: translateX(-90px); }
+        #hBarR.split { transform: translateX(90px); }
+        #crossbar { stroke: var(--red-main); stroke-width: 2.5; transition: opacity 0.5s ease; }
+        #crossbar.hide { opacity: 0; }
+
+        #text-reveal {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; pointer-events: none;
+        }
+        .reveal-text {
+            opacity: 0; transform: scale(0.9);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--white-main); font-family: var(--font-heading);
+            letter-spacing: 3px; font-size: clamp(22px, 6vw, 32px); text-align: center; white-space: nowrap;
+        }
+        .reveal-text.show { opacity: 1; transform: scale(1); }
+        .reveal-text .big-h { color: var(--red-main); font-size: 1.6em; }
+        .reveal-rule {
+            width: 0; height: 1px; background: var(--red-dusk); margin-top: 8px;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+        .reveal-rule.show { width: 140px; }
+
+        .skip-btn {
+            position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); right: 24px;
+            font-family: monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--white-sec); background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle);
+            padding: 8px 16px; border-radius: 4px; cursor: pointer; opacity: 0; z-index: 2;
+            transition: opacity 0.8s ease, color 0.3s, border-color 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .skip-btn.show { opacity: 0.7; }
+        .skip-btn:active { color: var(--red-main); border-color: var(--red-main); }
+
         /* VINHETA & PROFUNDIDADE */
         body::after {
             content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.95) 100%);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .btn::before, .pulse-dot {
-                animation: none !important;
-            }
+        /* BACKGROUND VIVO MINIMALISTA */
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3;
+            background: radial-gradient(circle at 50% 10%, #0d0203 0%, var(--bg-deep) 70%);
+        }
+        .ambient-glow {
+            position: absolute; top: -15%; left: 50%; width: 120vw; height: 50vh;
+            background: radial-gradient(ellipse, rgba(193, 18, 31, 0.05) 0%, transparent 70%);
+            pointer-events: none; animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(-50%, 0) scale(1); }
+            100% { transform: translate(-48%, 2%) scale(1.05); }
+        }
+
+        /* PARTÍCULAS GEOMÉTRICAS */
+        .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+        .particle { position: absolute; color: var(--red-main); opacity: 0; font-family: monospace; font-size: 10px; animation: floatSymbol infinite linear; }
+        .p1 { left: 15%; animation-duration: 25s; font-size: 12px; animation-delay: 0s; }
+        .p2 { left: 85%; animation-duration: 30s; font-size: 14px; animation-delay: 4s; }
+        .p3 { left: 45%; animation-duration: 28s; font-size: 10px; animation-delay: 8s; opacity: 0.05;}
+        .p4 { left: 75%; animation-duration: 35s; font-size: 12px; animation-delay: 2s; }
+        .p5 { left: 20%; animation-duration: 32s; font-size: 14px; animation-delay: 12s; }
+        .p6 { left: 60%; animation-duration: 22s; font-size: 10px; animation-delay: 6s; }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.07; }
+            80% { opacity: 0.07; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .cinematic-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.03; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* LAYOUT GERAL */
+        #main-content { opacity: 0; transition: opacity 0.8s ease; }
+        #main-content.visible { opacity: 1; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative; }
 
         h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1.5px; }
@@ -84,22 +217,13 @@
         /* URGENCY BAR */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10, 0, 0, 0.97); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            background: rgba(10, 0, 0, 0.95); backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(193, 18, 31, 0.2);
-            color: #d1d1d1; text-align: center;
-            padding: 8px 16px; z-index: 1000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px;
+            color: #d1d1d1; text-align: center; font-size: 11px; font-weight: 500;
+            padding: 12px 20px; z-index: 1000; letter-spacing: 1px; text-transform: uppercase;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
         }
-        .top-bar-row {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
-        }
-        .top-bar-row strong { color: var(--red-main); font-family: var(--font-heading); letter-spacing: 1px; font-size: 13px; font-weight: 400; }
-        .top-bar-sub {
-            font-size: 10px; color: #999; font-weight: 400; letter-spacing: 0.3px;
-        }
-        .top-bar-sub strong { color: var(--red-main); font-weight: 600; }
-        .pulse-dot { width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%; box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate; flex-shrink: 0; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%; box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate; }
         @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
         /* HERO */
@@ -118,11 +242,11 @@
         }
         .btn:hover { background: #d61826; box-shadow: 0 15px 40px rgba(193, 18, 31, 0.25); transform: translateY(-2px); }
         .btn::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-150%) skewX(-25deg); animation: shine 4s infinite; will-change: transform;
+            transform: skewX(-25deg); animation: shine 4s infinite;
         }
-        @keyframes shine { 0% { transform: translateX(-150%) skewX(-25deg); } 20%, 100% { transform: translateX(150%) skewX(-25deg); } }
+        @keyframes shine { 0% { left: -150%; } 20%, 100% { left: 150%; } }
         .btn:active { transform: scale(0.98); }
 
         /* TIMELINE */
@@ -149,6 +273,9 @@
         .card-insight { font-size: 12px; color: #777; border-top: 1px solid var(--border-subtle); padding-top: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* SCIENCE */
+        .science-box { text-align: center; padding: 50px 24px; background: #060606; border: 1px solid var(--border-subtle); border-radius: 6px; }
+        .science-box p { font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; margin-top: 16px; }
+
         /* CARROSSEL DE PRINTS (RESULTADOS) */
         .proof-carousel { margin-top: 20px; }
         .carousel-viewport {
@@ -174,6 +301,9 @@
         /* ÁREA DE MEMBROS (IMAGEM ÚNICA) */
         .members-preview { margin-top: 20px; text-align: center; }
         .members-frame { margin-top: 28px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a; }
+        .members-frame .browser-bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle); }
+        .browser-bar span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+        .browser-bar span:nth-child(1) { background: #C1121F; }
         .members-frame img { width: 100%; display: block; }
         .members-placeholder { width: 100%; aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--white-sec); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .members-placeholder svg { width: 36px; height: 36px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
@@ -210,7 +340,7 @@
         .trust-label { display: block; font-size: 10px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 8px; font-weight: 500; line-height: 1.4; }
 
         .testimonials-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-        .testimonial-card { background: rgba(15, 15, 15, 0.75); border: 1px solid var(--border-subtle); padding: 24px; border-radius: 6px; transition: transform 0.3s ease, border-color 0.3s ease; }
+        .testimonial-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); padding: 24px; border-radius: 6px; backdrop-filter: blur(5px); transition: transform 0.3s ease, border-color 0.3s ease; }
         .testimonial-card:active { border-color: var(--border-highlight); transform: scale(0.98); }
         
         .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -251,15 +381,16 @@
 
         /* OFFER */
         .offer-box { background: #080808; border: 1px solid var(--red-main); padding: 48px 24px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 6px; }
-        .offer-badge {
-            display: inline-block; background: rgba(193,18,31,0.1); border: 1px solid var(--border-highlight);
-            color: var(--red-main); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-            padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+        .offer-box::before {
+            content: 'ACESSO RESTRITO LIBERADO'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: var(--bg-deep); border: 1px solid var(--red-main); color: var(--red-main); font-size: 10px; font-weight: 600;
+            padding: 4px 16px; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px; white-space: nowrap;
         }
         .price-container { margin-bottom: 32px; display: flex; flex-direction: column; gap: 8px; }
         .price-old { font-size: 14px; text-decoration: line-through; color: #666; text-transform: uppercase; letter-spacing: 1px;}
         .price-new { font-size: 56px; color: #fff; font-family: var(--font-heading); line-height: 1; }
 
+        /* NOVO: selos de segurança perto do CTA final */
         .security-badges {
             display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap;
         }
@@ -276,11 +407,6 @@
         .timer-boxes { display: flex; align-items: center; gap: 12px; }
         .timer-box { background: transparent; border-bottom: 1px solid var(--red-main); padding: 8px 12px; font-family: var(--font-heading); font-size: 28px; color: #fff; }
         .timer-sep { color: #444; font-size: 20px; font-weight: 300; }
-        .timer-exact {
-            font-size: 12.5px; color: #999; font-weight: 400; text-align: center;
-            letter-spacing: 0.3px; line-height: 1.5;
-        }
-        .timer-exact strong { color: var(--red-main); font-weight: 600; }
 
         /* GARANTIA */
         .guarantee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: left;}
@@ -305,7 +431,7 @@
         /* STICKY CTA */
         .sticky-cta {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(3, 3, 3, 0.97); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
             border-top: 1px solid rgba(193, 18, 31, 0.1); padding: 16px 24px;
             z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -317,19 +443,9 @@
             .sticky-cta { left: 50%; transform: translate(-50%, 100%); max-width: 500px; border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle); }
             .sticky-cta.visible { transform: translate(-50%, 0); }
         }
-
-        /* Em telas de celular, o backdrop-filter (blur) e um dos efeitos
-           mais pesados para a GPU. Mantemos o efeito, so com menos
-           intensidade, para aliviar o processamento continuo. */
-        @media (max-width: 480px) {
-            .top-bar, .sticky-cta {
-                -webkit-backdrop-filter: blur(2px);
-                backdrop-filter: blur(2px);
-            }
-        }
     </style>
 
-  <script>
+    <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -343,16 +459,44 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"/></noscript>
     
     </head>
-<body>
+<body class="lock">
+
+    <div id="intro-overlay">
+        <div class="grid-bg-intro"></div>
+
+        <div class="intro-stage">
+            <span class="bracket tl"></span><span class="bracket tr"></span>
+            <span class="bracket bl"></span><span class="bracket br"></span>
+            <span class="hud-label" id="hudLabel">RENDERIZANDO_IDENTIDADE</span>
+            <span class="hud-pct" id="hudPct">00%</span>
+
+            <svg id="suit-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+                <path class="draw" id="hBarL" d="M160,45 L160,310"/>
+                <path class="draw" id="hBarR" d="M240,45 L240,310"/>
+                <path class="draw" id="crossbar" d="M160,178 L240,178"/>
+            </svg>
+
+            <div id="text-reveal">
+                <div class="reveal-text" id="revealText"><span class="big-h">H</span>OMEM DE PRESENÇA</div>
+                <div class="reveal-rule" id="revealRule"></div>
+            </div>
+        </div>
+
+        <button class="skip-btn" id="skipBtn">Pular ›</button>
+    </div>
 
     <div id="main-content">
         <div class="top-bar">
-            <div class="top-bar-row">
-                <div class="pulse-dot"></div>
-                Vagas com desconto expiram em <strong id="tb-timer">00:27:43</strong>
-            </div>
-            <div class="top-bar-sub" id="tb-exact"></div>
+            <div class="pulse-dot"></div> ATENÇÃO: Vagas com desconto liberadas
         </div>
+
+        <div class="ambient-bg"><div class="ambient-glow"></div></div>
+        <div class="particles-container">
+            <div class="particle p1">◆</div><div class="particle p2">+</div>
+            <div class="particle p3">▲</div><div class="particle p4">●</div>
+            <div class="particle p5">◆</div><div class="particle p6">+</div>
+        </div>
+        <div class="cinematic-grain"></div>
 
         <div class="wrapper">
             
@@ -361,7 +505,7 @@
                     <span class="white">Código</span>
                     <span class="red">da Atração</span>
                 </h1>
-                <p class="subheadline">Chega de mandar mensagem e ficar no vácuo. Aprenda a ler os sinais, conduzir a conversa e virar a opção que ela escolhe — não a que ela deixa esperando.</p>
+                <p class="subheadline">A anatomia silenciosa do desejo. Decodifique os sinais que elas tentam esconder, assuma o controle da dinâmica e torne-se a única opção viável.</p>
                 
                 <a href="#oferta" class="btn">
                     Desbloquear Acesso
@@ -373,23 +517,23 @@
 
             <section class="identify scroll-reveal">
                 <h2 class="section-title" style="font-size: 32px;">Isso já <br><span>aconteceu com você?</span></h2>
-                <p class="identify-intro">Se pelo menos dois desses pontos baterem, o problema não é você — é que ninguém te ensinou o método certo.</p>
+                <p class="identify-intro">Leia os pontos abaixo com calma. Se você se reconheceu em pelo menos dois, o problema não é você — é a falta de método.</p>
                 <ul class="audience-list" style="margin-top:24px;">
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você manda um "oi" de manhã e só recebe um "kkk oi" seco à noite — sem saber se ela sumiu ou tá enrolando.
+                        Você manda mensagem, ela demora horas para responder — ou simplesmente some sem explicação.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Você é sempre quem puxa assunto. Ela responde educada, mas nunca pergunta nada de volta.
+                        Você sente que está sempre puxando o assunto sozinho, sem retorno na mesma intensidade.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Ela já te chamou de "amigo" na sua cara, e você só sorriu sem saber o que dizer.
+                        Você já foi chamado de "amigo" quando a intenção sempre foi outra.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        A abertura apareceu e você travou. Ela seguiu em frente, e você ficou remoendo o que devia ter falado.
+                        Você trava na hora certa e vê a oportunidade escapar bem na sua frente.
                     </li>
                 </ul>
             </section>
@@ -401,15 +545,15 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <h4>Fase 1: Desconstrução</h4>
-                        <p>Você para de precisar da aprovação dela. Isso muda sua postura e seu tom — antes mesmo de abrir a boca.</p>
+                        <p>Você elimina instantaneamente a necessidade de validação. Sua linguagem corporal passa a comunicar alto valor antes mesmo da primeira palavra.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 2: Calibração</h4>
-                        <p>Você começa a notar o que ela não fala. Um olhar mais longo, uma resposta mais rápida — e sabe na hora se avança ou recua.</p>
+                        <p>O subtexto se torna claro. Você aprende a ler microexpressões e descobre exatamente quando recuar para gerar falta, e quando avançar com precisão cirúrgica.</p>
                     </div>
                     <div class="timeline-item">
                         <h4>Fase 3: Magnetismo</h4>
-                        <p>Vira automático — a conversa flui, ela ri de verdade, e a tensão aparece sozinha.</p>
+                        <p>O esforço desaparece. A criação de tensão se torna instintiva, gerando conversas profundas e uma química impossível de ser ignorada.</p>
                     </div>
                 </div>
             </section>
@@ -418,19 +562,14 @@
 
             <section class="story-section scroll-reveal">
                 <h2 class="section-title">A verdade brutal: <br><span>O desejo não se negocia</span></h2>
-                <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Os erros mais comuns:</p>
-                <ul class="target-list" style="margin-top:0; padding-top:0; border-top:none;">
-                    <li>Usam pura lógica para tentar gerar interesse</li>
-                    <li>Sufocam a conversa com excesso de mensagens</li>
-                    <li>Demonstram interesse e disponibilidade quando deveriam demonstrar mistério</li>
-                </ul>
-                <p>O resultado? Você vira só mais um na tela dela, a caminho da zona de amizade.</p>
+                <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Eles usam a lógica. Eles sufocam com mensagens. Demonstram interesse e disponibilidade quando deveriam demonstrar mistério.</p>
+                <p>O resultado? Você vira apenas mais um na tela do celular dela, caminhando a passos largos para a zona de amizade.</p>
                 
                 <div class="highlight-box">
                     "A atração não é uma escolha consciente. É uma resposta biológica autônoma a estímulos específicos. Quem domina o estímulo, controla a resposta."
                 </div>
                 
-                <p>O <strong>Código da Atração</strong> não é sobre frases prontas. É sobre entender a engenharia do desejo e alinhar sua presença pra ela investir na conversa.</p>
+                <p>O <strong>Código da Atração</strong> não é sobre frases feitas ou joguinhos manipulativos. É sobre entender a engenharia por trás do desejo feminino e alinhar a sua presença para que ela invista na interação.</p>
 
                 <ul class="target-list scroll-reveal">
                     <li>Pare de tentar manter o assunto vivo e aprenda a usar o silêncio a seu favor.</li>
@@ -442,39 +581,29 @@
 
             <div class="section-divider"></div>
 
-            <section class="mid-cta scroll-reveal">
-                <p>Agora você entende a engenharia por trás do desejo. <strong>A dúvida não é se funciona — é se você vai aplicar hoje ou continuar na mesma.</strong></p>
-                <a href="#oferta" class="btn">
-                    Quero Aplicar o Método
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </section>
-
-            <div class="section-divider"></div>
-
             <section class="audience scroll-reveal">
                 <h2 class="section-title">Para quem é <br><span>este método</span></h2>
-                <p style="font-size: 14px; color: var(--white-sec); text-align: center; font-weight: 300; line-height: 1.6;">Se você se reconhece em pelo menos um ponto abaixo, esse método é pra você.</p>
+                <p style="font-size: 14px; color: var(--white-sec); text-align: center; font-weight: 300; line-height: 1.6;">Se você se reconhece em pelo menos um dos pontos abaixo, o Código da Atração foi construído para você.</p>
                 <ul class="audience-list">
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Não sabe identificar interesse real — e deixa passar oportunidades claras.
+                        Não sabe identificar quando existe interesse real — e acaba deixando passar oportunidades claras.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Perde conversas boas por não saber conduzir depois do "oi, tudo bem?".
+                        Perde conversas promissoras porque não sabe como conduzir depois do "oi, tudo bem?".
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Sempre acaba na zona de amizade, mesmo com outra intenção desde o início.
+                        Sempre acaba na zona de amizade, mesmo quando a intenção era outra desde o início.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Tem dificuldade em criar conexão real — as conversas ficam rasas ou mornas.
+                        Tem dificuldade em criar conexão real e sente que as conversas ficam rasas ou mornas.
                     </li>
                     <li>
                         <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-                        Trava na hora de responder e só pensa na resposta certa depois que a chance passou.
+                        Trava na hora de responder e só pensa na resposta perfeita depois que a chance já passou.
                     </li>
                 </ul>
             </section>
@@ -489,7 +618,7 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         Módulo 1: Arquitetura de Valor
                     </h3>
-                    <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota tudo logo nos primeiros minutos.</p>
+                    <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota suas chances logo nos 5 minutos iniciais da interação.</p>
                     <div class="card-insight">O erro fatal de postura que destrói sua autoridade instantaneamente.</div>
                 </div>
                 
@@ -498,7 +627,7 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         Módulo 2: Decodificação
                     </h3>
-                    <p>O mapeamento pra ler quando ela está interessada de verdade e o momento certo de escalar.</p>
+                    <p>O mapeamento definitivo para ler quando ela está interessada de verdade, quando está jogando e o momento exato de escalar a situação.</p>
                     <div class="card-insight">A "Regra do Contato Visual" que altera todo o balanço de poder.</div>
                 </div>
                 
@@ -507,14 +636,14 @@
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                         Módulo 3: Tensão e Polaridade
                     </h3>
-                    <p>A transição de uma conversa monótona pra uma interação visceral, criando conexão magnética em minutos.</p>
+                    <p>A transição exata de uma conversa monótona (lógica) para uma interação visceral (emocional), criando uma conexão magnética em minutos.</p>
                     <div class="card-insight">Estruturas precisas para gerar tensão por mensagem sem soar desesperado.</div>
                 </div>
 
                 <ul class="outcomes-list">
                     <li>
                         <span class="outcomes-num">1</span>
-                        <p>Como evitar os <strong>erros que matam o interesse</strong> logo nos primeiros minutos.</p>
+                        <p>Como evitar os <strong>erros que fazem uma mulher perder o interesse</strong> nos primeiros minutos de conversa.</p>
                     </li>
                     <li>
                         <span class="outcomes-num">2</span>
@@ -531,28 +660,21 @@
                 </ul>
             </section>
 
-            <section class="offer-box scroll-reveal" style="padding: 36px 24px;">
-                <span class="offer-badge">Oferta por tempo limitado</span>
-                <div class="price-container" style="margin-bottom: 24px;">
-                    <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
-                        <span class="price-old" style="font-size:14px; color:#999;">De <s>R$ 47,90</s></span>
-                        <span style="background:rgba(193,18,31,0.12); color:var(--red-main); font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:20px; border:1px solid rgba(193,18,31,0.3);">-69% OFF</span>
-                    </div>
-                    <span class="price-new" style="font-size:44px;">R$ 14,70</span>
-                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x sem juros</span>
-                </div>
-                <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
-                    Já Quero Dominar o Método
-                </a>
-                <p style="font-size:12px; color:#777; margin-top:18px;">7 dias de garantia. Se não funcionar, você reembolsa.</p>
+            <div class="section-divider"></div>
+
+            <section class="science-box scroll-reveal">
+                <svg class="svg-icon" style="width:40px; height:40px; margin-bottom: 20px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+                <h2 class="section-title" style="font-size: 32px; margin-bottom: 16px;">Engenharia <br><span>Comportamental</span></h2>
+                <p>O desejo não ocorre por acaso. Ele responde a gatilhos evolutivos enraizados no subconsciente. Ao decifrar esse código, você deixa de "tentar a sorte" e passa a operar com previsibilidade cirúrgica.</p>
             </section>
 
             <div class="section-divider"></div>
 
             <section class="members-preview scroll-reveal">
                 <h2 class="section-title" style="font-size: 30px;">Sua Área de <br><span>Membros</span></h2>
-                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, no seu ritmo, em qualquer dispositivo.</p>
+                <p style="font-size: 14px; color: var(--white-sec); font-weight: 300; line-height: 1.6;">Acesso organizado, direto e disponível para consumir no seu ritmo, de qualquer dispositivo.</p>
                 <div class="members-frame">
+                    <div class="browser-bar"><span></span><span></span><span></span></div>
                     <img src="79245d01-36e7-4931-adc8-ee1f09df994d.jpg" alt="Área de Membros" loading="lazy">
                 </div>
             </section>
@@ -693,13 +815,90 @@
                         </div>
                         <p class="t-comment">"Curti bastante. É um conteúdo direto e fácil de entender. Já percebi alguns erros que eu cometia sem perceber."</p>
                     </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Matheus R.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Comprei sem criar muita expectativa, mas gostei. Tem várias ideias que fazem sentido quando você coloca em prática."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Gabriel S.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Valeu o investimento. Não fica enrolando e vai direto ao ponto. Gostei da forma como os assuntos são explicados."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">João P.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Conteúdo bom e organizado. Algumas partes me fizeram enxergar situações que eu interpretava errado."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Rafael M.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Achei que seria mais do mesmo, mas me surpreendeu. Linguagem simples, prática e fácil de aplicar no dia a dia. 👊🔥"</p>
+                    </div>
+
                 </div>
             </section>
 
             <div class="section-divider"></div>
 
             <section class="mid-cta scroll-reveal">
-                <p>Você já viu os prints, a área de membros e o que os alunos disseram. <strong>As vagas com desconto são limitadas.</strong></p>
+                <p>Você já viu prints reais, a área de membros e o que outros alunos disseram. <strong>As vagas com desconto são limitadas e não voltam ao preço promocional.</strong></p>
                 <a href="#oferta" class="btn">
                     Garantir Minha Vaga Agora
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -748,14 +947,13 @@
             </section>
 
             <section class="offer-box scroll-reveal" id="oferta">
-                <span class="offer-badge">Oferta por tempo limitado</span>
                 <div class="price-container">
                     <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
                         <span class="price-old" style="font-size:16px; color:#999;">De <s>R$ 47,90</s></span>
                         <span style="background:rgba(193,18,31,0.12); color:var(--red-main); font-size:11px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:20px; border:1px solid rgba(193,18,31,0.3);">-69% OFF</span>
                     </div>
                     <span class="price-new">R$ 14,70</span>
-                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x de R$4,90 sem juros no cartão</span>
+                    <span style="font-size:12px; color:#777; text-transform:uppercase; letter-spacing:1px; font-weight:500;">à vista no Pix ou em até 3x de R$5.45 sem juros no cartão</span>
                 </div>
 
                 <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
@@ -774,7 +972,7 @@
                     </div>
                     <div class="security-item">
                         <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><line x1="2.5" y1="9.5" x2="21.5" y2="9.5"></line></svg>
-                        Cartão em até 3x
+                        Cartão em até 4x
                     </div>
                 </div>
 
@@ -785,7 +983,6 @@
                         <div class="timer-box" id="t-minutes">27</div><span class="timer-sep">:</span>
                         <div class="timer-box" id="t-seconds">43</div>
                     </div>
-                    <div class="timer-exact" id="timer-exact"></div>
                 </div>
 
                 <div class="guarantee">
@@ -793,7 +990,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red-main)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         Garantia Blindada
                     </h3>
-                    <p>Você tem <strong>7 dias</strong> pra testar o método. Se aplicar e sentir que não mudou sua dinâmica social, pede o reembolso. O risco é nosso.</p>
+                    <p>Você tem <strong>7 dias</strong> para colocar o método à prova. Se você aplicar a engenharia ensinada e achar que não transformou a sua dinâmica social, solicite o reembolso. O risco financeiro é integralmente nosso.</p>
                 </div>
             </section>
 
@@ -804,19 +1001,19 @@
                 
                 <div class="faq-item">
                     <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sim. Assim que o pagamento é confirmado (Pix ou cartão), o acesso chega automaticamente no seu e-mail.</p></div>
+                    <div class="faq-answer"><p>Absolutamente. Após a confirmação do pagamento via Pix ou Cartão, suas credenciais de acesso são enviadas automaticamente para o seu e-mail.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Posso parcelar a compra? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sim, pagamento único — não é assinatura. Dá pra pagar à vista no Pix ou parcelar em até 3x sem juros no cartão.</p></div>
+                    <div class="faq-answer"><p>Sim. É um pagamento único (não é assinatura) e pode ser feito à vista no Pix ou parcelado em até 4x sem juros no cartão de crédito.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Guia 100% digital, pra consumir de forma rápida e discreta no celular, tablet ou computador.</p></div>
+                    <div class="faq-answer"><p>É um guia prático 100% digital. Projetado para consumo anônimo e ágil no seu celular, tablet ou computador.</p></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Funciona para perfis introvertidos? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><p>Sim. Ele não pede que você finja extroversão — ensina a usar sua natureza observadora pra construir mistério, a maior arma dos introvertidos.</p></div>
+                    <div class="faq-answer"><p>O método não obriga você a encenar extroversão. Ele ensina a usar a sua natureza observadora para construir mistério e tensão silenciosa — a arma mais forte dos introvertidos.</p></div>
                 </div>
             </section>
 
@@ -836,163 +1033,126 @@
     </div>
 
     <script>
-        /**
-         * Timer de oferta.
-         *
-         * Regras:
-         * - O horário de encerramento é sempre em :00 ou :30.
-         * - Se faltarem menos de 11 minutos para o próximo :00/:30,
-         *   pula para o horário seguinte (evita prazos curtos demais).
-         * - O horário de encerramento é calculado UMA ÚNICA VEZ por
-         *   dispositivo (na primeira visita) e gravado no localStorage.
-         *   Em visitas seguintes o valor salvo é reutilizado e NÃO é
-         *   recalculado — o prazo não se estica nem se renova sozinho
-         *   naquele aparelho.
-         * - Quando o tempo chega a zero, o contador para em 00:00:00
-         *   e permanece assim (não reinicia automaticamente).
-         * - O cálculo do tempo restante usa Date.now() a cada tick,
-         *   em vez de decrementar um contador, para não perder
-         *   precisão quando a aba fica em segundo plano.
-         */
+        (function(){
+            var timers = [];
+            function schedule(fn, t){ timers.push(setTimeout(fn, t)); }
+
+            function setupDraw(el){
+                var len = el.getTotalLength ? el.getTotalLength() : 300;
+                el.style.strokeDasharray = len;
+                el.style.strokeDashoffset = len;
+            }
+            function trigger(el){ el.style.strokeDashoffset = 0; }
+
+            var drawEls = Array.prototype.slice.call(document.querySelectorAll('.draw'));
+            drawEls.forEach(setupDraw);
+
+            var hBarL=document.getElementById('hBarL'), hBarR=document.getElementById('hBarR'), crossbar=document.getElementById('crossbar'),
+                hudLabel=document.getElementById('hudLabel'), hudPct=document.getElementById('hudPct'),
+                revealText=document.getElementById('revealText'), revealRule=document.getElementById('revealRule'),
+                overlay=document.getElementById('intro-overlay'), skipBtn=document.getElementById('skipBtn'),
+                mainContent = document.getElementById('main-content');
+
+            var pctInterval = null;
+            function startPct(totalMs){
+                var start = Date.now();
+                hudPct.classList.add('show'); hudLabel.classList.add('show');
+                pctInterval = setInterval(function(){
+                    var pct = Math.min(100, Math.round((Date.now()-start)/totalMs*100));
+                    hudPct.textContent = (pct<10?'0':'')+pct+'%';
+                    if(pct>=100) clearInterval(pctInterval);
+                }, 40);
+            }
+            function stopPct(){ if(pctInterval) clearInterval(pctInterval); hudPct.textContent='100%'; }
+
+            function drawH(){
+                trigger(hBarL); trigger(hBarR);
+                schedule(function(){ trigger(crossbar); }, 400);
+            }
+
+            function splitH(){
+                hBarL.classList.add('split'); hBarR.classList.add('split');
+                crossbar.classList.add('hide');
+            }
+
+            function showText(){
+                revealText.classList.add('show');
+                schedule(function(){ revealRule.classList.add('show'); }, 150);
+            }
+
+            function fadeOutOverlay(){
+                overlay.classList.add('fade-out');
+                mainContent.classList.add('visible');
+                document.body.classList.remove('lock');
+                setTimeout(function(){ overlay.style.display = 'none'; revealOnScroll(); }, 1200);
+            }
+
+            function skip(){
+                timers.forEach(clearTimeout);
+                if(pctInterval) clearInterval(pctInterval);
+                fadeOutOverlay();
+            }
+            skipBtn.addEventListener('click', skip);
+
+            schedule(function(){ startPct(1400); }, 0);
+            schedule(function(){ skipBtn.classList.add('show'); }, 700);
+
+            schedule(function(){ drawH(); }, 300);
+            schedule(function(){ stopPct(); }, 1400);
+            schedule(function(){ splitH(); }, 1700);
+            schedule(function(){ showText(); }, 2000);
+            schedule(function(){ fadeOutOverlay(); }, 3800);
+        })();
+
         function initCountdown() {
-            const hBox = document.getElementById('t-hours');
-            const mBox = document.getElementById('t-minutes');
-            const sBox = document.getElementById('t-seconds');
-            const exactBox = document.getElementById('timer-exact');
-            const tbTimerBox = document.getElementById('tb-timer');
-            const tbExactBox = document.getElementById('tb-exact');
-            const storageKey = 'codigo_atracao_expiration_v2';
-            const MIN_MS = 11 * 60 * 1000;
-
-            function getNextHalfHour(from) {
-                const d = new Date(from.getTime());
-                d.setSeconds(0, 0);
-                if (d.getMinutes() < 30) {
-                    d.setMinutes(30);
-                } else {
-                    d.setMinutes(0);
-                    d.setHours(d.getHours() + 1);
-                }
-                return d;
-            }
-
-            function computeTarget() {
-                const now = new Date();
-                let target = getNextHalfHour(now);
-                if (target.getTime() - now.getTime() < MIN_MS) {
-                    target = getNextHalfHour(target);
-                }
-                return target.getTime();
-            }
+            const hBox = document.getElementById('t-hours'), mBox = document.getElementById('t-minutes'), sBox = document.getElementById('t-seconds');
+            const storageKey = 'codigo_atracao_timer_pro';
+            const duration = 27 * 60 * 1000 + 43 * 1000;
 
             let targetTime = localStorage.getItem(storageKey);
-            if (targetTime === null) {
-                targetTime = computeTarget();
-                localStorage.setItem(storageKey, String(targetTime));
-            } else {
-                targetTime = parseInt(targetTime, 10);
-            }
+            if (!targetTime || new Date().getTime() > parseInt(targetTime, 10)) {
+                targetTime = new Date().getTime() + duration;
+                localStorage.setItem(storageKey, targetTime);
+            } else { targetTime = parseInt(targetTime, 10); }
 
-            function renderExactTime() {
-                const target = new Date(targetTime);
-                const now = new Date();
-
-                const pad = (n) => String(n).padStart(2, '0');
-                const timeStr = pad(target.getHours()) + ':' + pad(target.getMinutes());
-                const dateStr = pad(target.getDate()) + '/' + pad(target.getMonth() + 1) + '/' + target.getFullYear();
-
-                const sameDay = target.getDate() === now.getDate() &&
-                                 target.getMonth() === now.getMonth() &&
-                                 target.getFullYear() === now.getFullYear();
-
-                const dayLabel = sameDay ? 'hoje' : 'amanhã';
-                const text = 'Oferta válida até às <strong>' + timeStr + '</strong> de ' + dayLabel + ' (' + dateStr + ')';
-
-                if (exactBox) exactBox.innerHTML = text;
-                if (tbExactBox) tbExactBox.innerHTML = text;
-            }
-
-            renderExactTime();
-
-            function render(diffMs) {
-                if (diffMs < 0) diffMs = 0;
-                const totalSeconds = Math.floor(diffMs / 1000);
-                const hours = Math.floor(totalSeconds / 3600);
-                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                const seconds = totalSeconds % 60;
-                const fmt = (num) => String(num).padStart(2, '0');
-                if (hBox) hBox.textContent = fmt(hours);
-                if (mBox) mBox.textContent = fmt(minutes);
-                if (sBox) sBox.textContent = fmt(seconds);
-                if (tbTimerBox) tbTimerBox.textContent = fmt(hours) + ':' + fmt(minutes) + ':' + fmt(seconds);
-            }
-
-            let intervalId = null;
-
-            function tick() {
-                const diff = targetTime - Date.now();
-                render(diff);
+            function updateTimer() {
+                let diff = targetTime - new Date().getTime();
                 if (diff <= 0) {
-                    render(0);
-                    if (intervalId) {
-                        clearInterval(intervalId);
-                        intervalId = null;
-                    }
+                    targetTime = new Date().getTime() + duration;
+                    localStorage.setItem(storageKey, targetTime);
+                    diff = duration;
                 }
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const format = (num) => String(num).padStart(2, '0');
+
+                if(hBox) hBox.textContent = format(hours);
+                if(mBox) mBox.textContent = format(minutes);
+                if(sBox) sBox.textContent = format(seconds);
             }
-
-            tick();
-            intervalId = setInterval(tick, 1000);
-
-            document.addEventListener('visibilitychange', function () {
-                if (document.visibilityState === 'visible') tick();
-            });
+            updateTimer(); setInterval(updateTimer, 1000);
         }
 
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
+            const revealPoint = 50;
             revealElements.forEach(el => {
-                if (el.getBoundingClientRect().top < windowHeight - 50) {
-                    el.classList.add('active');
-                }
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) { el.classList.add('active'); }
             });
         };
 
-        if ('IntersectionObserver' in window) {
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
-            revealElements.forEach(el => revealObserver.observe(el));
-        } else {
-            window.addEventListener('scroll', revealOnScroll, { passive: true });
-        }
-
         const stickyCta = document.getElementById('stickyCta');
         const offerSection = document.getElementById('oferta');
-
-        let offerInView = false;
-        if ('IntersectionObserver' in window && offerSection) {
-            const offerObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { offerInView = entry.isIntersecting; });
-            }, { threshold: 0 });
-            offerObserver.observe(offerSection);
-        }
-
-        let stickyTicking = false;
         const handleStickyVisibility = () => {
-            if (stickyTicking) return;
-            stickyTicking = true;
-            requestAnimationFrame(() => {
-                const shouldShow = window.scrollY > 500 && !offerInView;
-                stickyCta.classList.toggle('visible', shouldShow);
-                stickyTicking = false;
-            });
+            const offerTop = offerSection.getBoundingClientRect().top;
+            if (window.scrollY > 500 && offerTop > window.innerHeight) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
         };
 
         const faqItems = document.querySelectorAll('.faq-item');
@@ -1051,7 +1211,7 @@
                 if (diff > 40) prev();
                 else if (diff < -40) next();
                 isSwiping = false;
-            }, { passive: true });
+            });
 
             function resetAuto() {
                 if (autoTimer) clearInterval(autoTimer);
@@ -1062,7 +1222,7 @@
             resetAuto();
         }
 
-        window.addEventListener('scroll', handleStickyVisibility, { passive: true });
+        window.addEventListener('scroll', () => { revealOnScroll(); handleStickyVisibility(); });
         window.addEventListener('load', () => { initCountdown(); revealOnScroll(); initProofCarousel(); });
     </script>
 </body>
